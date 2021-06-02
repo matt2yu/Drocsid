@@ -20,7 +20,6 @@ const App = () => (
         <h1>Drocsid</h1>
       </Link>
       <SplashContainer />
-      {/* <LoginFormContainer /> */}
     </header>
     <Switch>
       <AuthRoute exact path="/login" component={LogInFormContainer} />

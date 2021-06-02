@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
-# User.destroy_all
-# users = []
-# 99.times {
-#   users << User.create!(
-#     email:
-#   )
-# }
+User.destroy_all
+users = []
+99.times {
+  users << User.create!(
+    email:
+  )
+}

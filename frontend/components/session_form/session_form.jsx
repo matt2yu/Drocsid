@@ -10,6 +10,7 @@ class SessionForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.showEmailForSignUp = this.showEmailForSignUp.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
   }
 
   update(field) {
@@ -24,17 +25,18 @@ class SessionForm extends React.Component {
     this.props.processForm(user);
   }
 
-  // renderErrors() {
-  //   return(
-  //     <ul>
-  //       {this.props.errors.map((error, i) => (
-  //         <li key={`error-${i}`}>
-  //           {error}
-  //         </li>
-  //       ))}
-  //     </ul>
-  //   );
-  // }
+  renderErrors() {
+      if (this.props.errors !== undefined) 
+    {return (
+      <ul>
+        {this.props.errors.map((error, i) => (
+        <li key={`error-${i}`}>
+          {error}
+        </li>
+          ))}
+      </ul>
+      )}
+  }
 
   showEmailForSignUp() {
     if (this.props.formType ==='signup') {
@@ -48,6 +50,15 @@ class SessionForm extends React.Component {
     }
   }
 
+  demoUser() {
+    let user = {
+      email: 'demo@test.com',
+      username: 'demo_user',
+      password: 'password'
+    }
+    this.props.processForm(user)
+  }
+
   render() {
     return (
       <div className="login-form-container">
@@ -55,7 +66,7 @@ class SessionForm extends React.Component {
           Welcome to Drocsid!
           <br/>
           Please {this.props.formType} or {this.props.navLink}
-          {/* {this.renderErrors()} */}
+          {this.renderErrors()}
           <div className="login-form">
             <br/>
             {this.showEmailForSignUp()}
@@ -77,6 +88,7 @@ class SessionForm extends React.Component {
             </label>
             <br/>
             <input className="session-submit" type="submit" value={this.props.formType} />
+            <button onclick="demoUser()">Demo</button>
           </div>
         </form>
       </div>
