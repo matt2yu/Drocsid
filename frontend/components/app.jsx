@@ -6,6 +6,7 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import SplashContainer from './splash/splash_container';
 import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
+import ServerModal from './server/server_modals/ServerModal';
  
 
 const App = () => (
@@ -14,7 +15,8 @@ const App = () => (
       <Link to="/" className="header-link">
         <h1>Drocsid</h1>
       </Link>
-      <SplashContainer />
+      <Route exact path="/" component={SplashContainer} />
+      <ServerModal />
     </header>
     <Switch>
       <AuthRoute exact path="/login" component={LogInFormContainer} />
