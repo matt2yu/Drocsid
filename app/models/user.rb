@@ -7,6 +7,10 @@ class User < ApplicationRecord
   validates :password_digest, presence: true 
   validates :session_token, presence: true, uniqueness: true
 
+  has_many :messages,
+    primary_key: :id,
+    foreign_key: :author_id,
+    class_name: :Message
 
   attr_reader :password
 

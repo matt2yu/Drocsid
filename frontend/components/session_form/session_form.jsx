@@ -11,6 +11,7 @@ class SessionForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.showEmailForSignUp = this.showEmailForSignUp.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
+    this.demoUser = this.demoUser.bind(this);
   }
 
   update(field) {
@@ -50,13 +51,25 @@ class SessionForm extends React.Component {
     }
   }
 
-  demoUser() {
-    let user = {
+  demoUser(e) {
+    e.preventDefault();
+      const demoAccount = ({
       email: 'demo@test.com',
-      username: 'demo_user',
+      username: 'demouser',
       password: 'password'
+    });
+      this.props.processForm(demoAccount)
+  }
+
+  insertDemoUser () {
+    if (this.props.formType === 'login') {
+      return (
+        <div className='demo-login'>
+          <h2>Guest Demo Login</h2>
+          <button onClick={this.demoUser}>demo</button>
+        </div>
+      )
     }
-    this.props.processForm(user)
   }
 
   render() {
@@ -88,7 +101,7 @@ class SessionForm extends React.Component {
             </label>
             <br/>
             <input className="session-submit" type="submit" value={this.props.formType} />
-            <button onclick="demoUser()">Demo</button>
+            {this.insertDemoUser()}
           </div>
         </form>
       </div>

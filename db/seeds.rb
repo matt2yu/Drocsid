@@ -8,9 +8,19 @@
 require 'faker'
 
 User.destroy_all
+
 users = []
-99.times {
+
+User.create!(
+  email: 'demo@test.com',
+  username: 'demouser',
+  password: 'password'
+)
+
+10.times {
   users << User.create!(
-    email:
+    email: Faker::Internet.email,
+    username: Faker::FunnyName.two_word_name,
+    password: Faker::Number.number(digits: 12)
   )
 }
