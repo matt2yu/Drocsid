@@ -86,17 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./frontend/actions/server_actions.js":
-/*!********************************************!*\
-  !*** ./frontend/actions/server_actions.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -190,8 +179,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _splash_splash_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./splash/splash_container */ "./frontend/components/splash/splash_container.js");
 /* harmony import */ var _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./session_form/signup_form_container */ "./frontend/components/session_form/signup_form_container.jsx");
 /* harmony import */ var _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./session_form/login_form_container */ "./frontend/components/session_form/login_form_container.jsx");
-/* harmony import */ var _server_server_modals_ServerModal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./server/server_modals/ServerModal */ "./frontend/components/server/server_modals/ServerModal.jsx");
-
 
 
 
@@ -208,7 +195,7 @@ var App = function App() {
     exact: true,
     path: "/",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_server_server_modals_ServerModal__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
     exact: true,
     path: "/login",
     component: _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_6__["default"]
@@ -250,17 +237,6 @@ var Root = function Root(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Root);
-
-/***/ }),
-
-/***/ "./frontend/components/server/server_modals/ServerModal.jsx":
-/*!******************************************************************!*\
-  !*** ./frontend/components/server/server_modals/ServerModal.jsx ***!
-  \******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/matt2yu/Drocsid/frontend/components/server/server_modals/ServerModal.jsx'");
 
 /***/ }),
 
@@ -364,6 +340,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     _this.showEmailForSignUp = _this.showEmailForSignUp.bind(_assertThisInitialized(_this));
     _this.renderErrors = _this.renderErrors.bind(_assertThisInitialized(_this));
     _this.demoUser = _this.demoUser.bind(_assertThisInitialized(_this));
+    _this.insertDemoUser = _this.insertDemoUser.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -409,13 +386,17 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "demoUser",
     value: function demoUser(e) {
+      var _this3 = this;
+
       e.preventDefault();
       var demoAccount = {
         email: 'demo@test.com',
         username: 'demouser',
         password: 'password'
       };
-      this.props.processForm(demoAccount);
+      this.props.processForm(demoAccount).then(function () {
+        return _this3.props.history.push('/');
+      });
     }
   }, {
     key: "insertDemoUser",
@@ -649,14 +630,11 @@ document.addEventListener('DOMContentLoaded', function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
-/* harmony import */ var _servers_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./servers_reducer */ "./frontend/reducers/servers_reducer.js");
-
+/* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  servers: _servers_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  users: _session_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
 }));
 
 /***/ }),
@@ -672,13 +650,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
-!(function webpackMissingModule() { var e = new Error("Cannot find module './servers_errors_reducer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  server: !(function webpackMissingModule() { var e = new Error("Cannot find module './servers_errors_reducer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
+  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
 }));
 
 /***/ }),
@@ -710,55 +685,6 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
-
-/***/ }),
-
-/***/ "./frontend/reducers/servers_reducer.js":
-/*!**********************************************!*\
-  !*** ./frontend/reducers/servers_reducer.js ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../actions/server_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-var serversReducer = function serversReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  var newState = Object.assign({}, state);
-  Object.freeze(state);
-
-  switch (action.type) {
-    case !(function webpackMissingModule() { var e = new Error("Cannot find module '../../actions/server_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()):
-      return action.servers;
-
-    case !(function webpackMissingModule() { var e = new Error("Cannot find module '../../actions/server_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()):
-      return Object.assign({}, state, _defineProperty({}, action.serverInfo.server.id, action.serverInfo.server));
-
-    case !(function webpackMissingModule() { var e = new Error("Cannot find module '../../actions/server_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()):
-      delete newState[action.serverId];
-      return Object.assign({}, newState, _defineProperty({}, action.serverInfo.server.id, action.serverInfo.server));
-
-    case !(function webpackMissingModule() { var e = new Error("Cannot find module '../../actions/server_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()):
-      delete newState[action.serverId];
-      return newState;
-
-    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["LOGOUT_CURRENT_USER"]:
-      return {};
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (serversReducer);
 
 /***/ }),
 
@@ -842,48 +768,6 @@ var sessionReducer = function sessionReducer() {
 /***/ (function(module, exports) {
 
 
-
-/***/ }),
-
-/***/ "./frontend/reducers/users_reducer.js":
-/*!********************************************!*\
-  !*** ./frontend/reducers/users_reducer.js ***!
-  \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../actions/message_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/server_actions */ "./frontend/actions/server_actions.js");
-/* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_actions_server_actions__WEBPACK_IMPORTED_MODULE_1__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-var usersReducer = function usersReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SERVER_INFO"]:
-      return action.info.members;
-
-    case _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SERVER_MEMBERS"]:
-      return action.members;
-
-    case !(function webpackMissingModule() { var e = new Error("Cannot find module '../actions/message_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()):
-      return Object.assign({}, state, _defineProperty({}, action.message.authorId, action.message.author));
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (usersReducer);
 
 /***/ }),
 

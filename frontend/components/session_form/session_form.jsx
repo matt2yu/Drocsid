@@ -12,6 +12,7 @@ class SessionForm extends React.Component {
     this.showEmailForSignUp = this.showEmailForSignUp.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
     this.demoUser = this.demoUser.bind(this);
+    this.insertDemoUser = this.insertDemoUser.bind(this);
   }
 
   update(field) {
@@ -58,19 +59,21 @@ class SessionForm extends React.Component {
       username: 'demouser',
       password: 'password'
     });
-      this.props.processForm(demoAccount)
+    this.props.processForm(demoAccount).then(() => this.props.history.push('/'))
   }
 
-  insertDemoUser () {
-    if (this.props.formType === 'login') {
-      return (
-        <div className='demo-login'>
-          <h2>Guest Demo Login</h2>
-          <button onClick={this.demoUser}>demo</button>
-        </div>
-      )
-    }
-  }
+  
+
+      insertDemoUser () {
+        if (this.props.formType === 'login') {
+          return (
+            <div className='demo-login'>
+              <h2>Guest Demo Login</h2>
+              <button onClick={this.demoUser}>demo</button>
+            </div>
+          )
+        }
+      }
 
   render() {
     return (
