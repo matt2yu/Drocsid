@@ -10,8 +10,8 @@ import LogInFormContainer from './session_form/login_form_container';
 
 const App = () => (
   <div>
-      <Route exact path="/" component={SplashContainer} />
     <Switch>
+      <Route exact path="/" component={SplashContainer} />
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
     </Switch>
