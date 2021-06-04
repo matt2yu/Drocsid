@@ -604,7 +604,7 @@ var Splash = function Splash(_ref) {
       to: "/login"
     }, "Open Discord"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       className: "discord-logo",
-      src: "https://i.imgur.com/ZNMyD61.png"
+      src: "https://i.imgur.com/QtbNih0.png"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "splash-content"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {

@@ -15,7 +15,7 @@ const Splash = ({ currentUser, logout }) => {
 
         <div className='login-container'>
           <Link className='log-button' to="/login">Open Discord</Link>
-          <img className='discord-logo' src="https://i.imgur.com/ZNMyD61.png"/>
+          <img className='discord-logo' src="https://i.imgur.com/QtbNih0.png"/>
         </div>
       
       <div className='splash-content'>
