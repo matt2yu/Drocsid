@@ -5,7 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'faker'
 
 User.destroy_all
 
@@ -18,6 +17,7 @@ User.create!(
 )
 
 10.times {
+require 'faker'
   users << User.create!(
     email: Faker::Internet.email,
     username: Faker::FunnyName.two_word_name,
