@@ -1,9 +1,12 @@
+
+
 .splash {
   background: url('https://i.imgur.com/DOtvcDs.png');
   background-size: cover;
   margin: 0px;
   padding: 0px;
   top: 0;
+  left: 0;
   background-repeat: no-repeat;
   box-sizing: border-box;
   width: 100%;
@@ -18,8 +21,8 @@
   display: flex;
   justify-content: space-evenly;
   width: 500px;
-  font-family: 'Noto Sans JP', sans-serif;
-  color: black;
+  font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: white;
   font-weight: bold;
   margin-top: 25px;
   padding: 0px;
@@ -46,7 +49,7 @@
 }
 
 .splash-signup {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: Whitney, 'Helvetica Neue', Helvetica,Arial, sans-serif;
   font-size: 20px;
   width: 200px;
   height: 40px;
@@ -58,14 +61,14 @@
 }
 
 .header {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Luckiest Guy', cursive;
   font-size: 36px;
   color: white;
   margin-bottom: 25px;
 }
 
 .splash-text {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: Whitney, 'Helvetica Neue', Helvetica,Arial, sans-serif;
   font-size: 20px;
   color: white;
   text-align: center;
@@ -111,5 +114,7 @@
   position: absolute;
 }
 
-a, a:hover, a:active, a:visited { 
-  color: white; }
+a{ 
+  color: white;
+  text-decoration: none; 
+}
