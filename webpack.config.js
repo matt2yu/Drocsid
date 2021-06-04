@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: './frontend/drocsid.jsx',
   output: {
-    path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
+    path: path.resolve(__dirname, 'app', 'assets', 'javascripts', 'scss'),
     filename: 'bundle.js',
   },
   module: {
@@ -16,6 +16,7 @@ module.exports = {
           presets: ['@babel/env', '@babel/react'],
         },
       },
+      
     ],
   },
   devtool: 'source-map',

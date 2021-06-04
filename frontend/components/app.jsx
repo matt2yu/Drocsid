@@ -12,7 +12,6 @@ const App = () => (
   <div>
     <header>
       <Link to="/" className="header-link">
-        <h1>Drocsid</h1>
       </Link>
       <Route exact path="/" component={SplashContainer} />
     </header>
