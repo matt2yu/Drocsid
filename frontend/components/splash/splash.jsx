@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const SplashBg = {backgroundImage: `url(${window.splashbg})`};
 
 const Splash = ({ currentUser, logout }) => {
   const sessionLinks = () => (
     <div>
       {/* <div className='splash' style={{backgroundImage: `url(${splash_bg})`}}> */}
-      <div className='splash' style={SplashBg}>
+      <div className='splash'>
         <nav className='nav-bar'>
           <a href="https://drocsid-clone.herokuapp.com/#/" target="_blank">Download</a>
           <a href="https://drocsid-clone.herokuapp.com/#/" target="_blank">Why Drocsid?</a>
@@ -17,6 +16,7 @@ const Splash = ({ currentUser, logout }) => {
 
         <div className='login-container'>
           <Link className='log-button' to="/login">Open Discord</Link>
+          <img className='discord-logo' src="https://i.imgur.com/ZNMyD61.png"/>
         </div>
       
       <div className='splash-content'>

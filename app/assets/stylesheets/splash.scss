@@ -1,12 +1,17 @@
 .splash {
-  background-image: url('../images/splashbg.jpg');
-  background-size: contain;
+  background: url('https://i.imgur.com/DOtvcDs.png');
+  background-size: cover;
+  margin: 0px;
+  padding: 0px;
+  top: 0;
   background-repeat: no-repeat;
+  box-sizing: border-box;
   width: 100%;
-  height: 1000px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
 }
 
 .nav-bar {
@@ -16,6 +21,16 @@
   font-family: 'Noto Sans JP', sans-serif;
   color: black;
   font-weight: bold;
+  margin-top: 25px;
+  padding: 0px;
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  width: 750px;
 }
 
 .splash-login {
@@ -35,8 +50,8 @@
   font-size: 20px;
   width: 200px;
   height: 40px;
-  background-color: gray;
-  color: white;
+  background-color: white;
+  color: #25262e;
   border-radius: 20px;
   text-align: center;
   line-height: 40px;
@@ -45,25 +60,18 @@
 .header {
   font-family: 'Lato', sans-serif;
   font-size: 36px;
-  color: black;
+  color: white;
   margin-bottom: 25px;
 }
 
 .splash-text {
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 20px;
-  color: black;
+  color: white;
   text-align: center;
   margin-bottom: 25px;
 }
 
-.splash-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
-  width: 750px;
-}
 
 .splash-button-container {
   display: flex;
@@ -90,7 +98,18 @@
   background-color: gray;
   color: white;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 20px;
+  right: 20px;
   
 }
+
+.discord-logo {
+  width: 140px;
+  height: 32px;
+  top: 20px;
+  left: 20px;
+  position: absolute;
+}
+
+a, a:hover, a:active, a:visited { 
+  color: white; }
