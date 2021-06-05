@@ -2,6 +2,17 @@
   <script id="bootstrap-current-user" type="text/javascript">
     window.currentUser = <%= render("api/users/user.json.jbuilder",
       user: current_user).html_safe %>
+
+      window.allServers = <%= render(
+      "api/users/all_servers.json.jbuilder",
+      user: current_user
+    ).html_safe %>
+
+    window.userServers = <%= render(
+      "api/users/user_servers.json.jbuilder",
+      user: current_user
+    ).html_safe %>
+
   </script>
 <% end %>
 

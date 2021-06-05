@@ -15,6 +15,11 @@ class SessionForm extends React.Component {
     this.insertDemoUser = this.insertDemoUser.bind(this);
   }
 
+
+  ComponentDidMount() {
+    this.props.clearErrors();
+  }
+  
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
@@ -24,7 +29,9 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user);
+    this.props.processForm(user).then(() => {
+      this.props.history.push('/home')
+    });
   }
 
   renderErrors() {
@@ -59,7 +66,7 @@ class SessionForm extends React.Component {
       username: 'demouser',
       password: 'password'
     });
-    this.props.processForm(demoAccount).then(() => this.props.history.push('/'))
+    this.props.processForm(demoAccount).then(() => this.props.history.push('/home'))
   }
 
   

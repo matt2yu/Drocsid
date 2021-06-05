@@ -7,13 +7,19 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
+Server.destroy_all
 
 users = []
 
-User.create!(
+demo_user = User.create!(
   email: 'demo@test.com',
   username: 'demouser',
   password: 'password'
+)
+
+demo_server = Server.create!(
+  name: 'testserver',
+  owner_id: demo_user.id
 )
 
 10.times {

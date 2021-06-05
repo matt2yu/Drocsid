@@ -1,21 +1,14 @@
-export const getServer = (serverId) => {
+export const fetchServers = () => {
+  return $.ajax({
+    method: 'GET',
+    url: '/api/browse/servers'
+  })
+};
+
+export const fetchServer = (serverId) => {
   return $.ajax({
     method: 'GET',
     url: `/api/servers/${serverId}`
-  })
-};
-
-export const getUserServers = (userId) => {
-  return $.ajax({
-    method: 'GET',
-    url: `/api/users/${userId}/servers`
-  })
-};
-
-export const getServerMembers = (serverId) => {
-  return $.ajax({
-    method: 'GET',
-    url: `/api/servers/${serverId}/users`
   })
 };
 
@@ -27,13 +20,6 @@ export const createServer = (server) => {
   })
 };
 
-export const deleteServer = (serverId) => {
-  return $.ajax({
-    method: 'DELETE',
-    url: `/api/servers/${serverId}`
-  })
-};
-
 export const updateServer = (server) => {
   return $.ajax({
     method: 'PATCH',
@@ -42,3 +28,23 @@ export const updateServer = (server) => {
   })
 };
 
+export const deleteServer = (serverId) => {
+  return $.ajax({
+    method: 'DELETE',
+    url: `/api/servers/${serverId}`
+  })
+};
+
+export const fetchUserServers = (userId) => {
+  return $.ajax({
+    method: 'GET',
+    url: `/api/users/${userId}/servers`
+  })
+};
+
+export const fetchServerMembers = (serverId) => {
+  return $.ajax({
+    method: 'GET',
+    url: `/api/servers/${serverId}/users`
+  })
+};
