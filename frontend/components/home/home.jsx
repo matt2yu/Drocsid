@@ -2,8 +2,8 @@ import React from 'react';
 
 import ServerNavBarContainer from '../server/server_navbar/server_nav_bar_container';
 
-const Home = ({ currentUser }) => (
-  <div className=''>
+const Home = ({ currentUser }) => {
+  return (<div className=''>
     <ServerNavBarContainer />
     <div className=''>
       <h1>Welcome {currentUser.username}!</h1>
@@ -15,6 +15,6 @@ const Home = ({ currentUser }) => (
       </h2>
     </div>
   </div>
-);
+)};
 
 export default Home;
