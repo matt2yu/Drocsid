@@ -1,27 +1,97 @@
 .login-form-container {
-  margin: auto;
-  display: grid;
-  place-items: center;
-  text-align: center;
+  background: url('https://i.imgur.com/U0XC2Xq.jpg');
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
+.title-text {
+  font-family: Whitney, 'Helvetica Neue', Helvetica,Arial, sans-serif;
+  font-size: 24px;
+  color: white;
+  font-weight: 600;
+}
+
+.subtitle-text {
+  font-family: Whitney, 'Helvetica Neue', Helvetica,Arial, sans-serif;
+  margin: 5px 0 5px 0;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #8d8e91;
+}
+
+.login-form-box {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  
+  label {
+    font-family: Whitney, 'Helvetica Neue', Helvetica,Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    color: #8E9297;
+  }
+}
 .login-signup {
   display: grid;
   place-items: center;
   text-align: center;
-
 }
 
+.session-submit {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #7289da;
+  text-align: center;
+  color: white;
+  height: 40px;
+  width: 305px;
+  margin: 0 0 8px;
+  padding: 2px 16px;
+  border-radius: 5px;
+  border: 0;
+}
 .login-form-box {
+  background: #36393f;
   display: grid;
   place-items: center;
   text-align: center;
 
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
 }
 
 .header-link {
   display: grid;
   place-items: center;
   text-align: center;
+}
 
+.demo-button {
+  background: url('https://i.imgur.com/anixLSS.png');
+  width: 200px;
+  height: 200px;
+  background-size: cover;
 }

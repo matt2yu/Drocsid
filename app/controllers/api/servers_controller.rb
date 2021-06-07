@@ -1,45 +1,26 @@
 class Api::ServersController < ApplicationController
-
-  def index 
-    user = User.find(params[:user_id])
-    @servers = user.servers
-    render '/api/servers/index'
-  end
-  
-  def show
-    @server = Server.find(params[:id])
-    render 'api/servers/show'
-  end
-
   def create
-    @server = Server.new(server_params)
-    @server.owner_id = current_user.id
+    @server = Server.new(servers_params)
     if @server.save
-      render 'api/servers/show'
-    end
-  end
-
-  def update
-    @server = Server.find_by(id: params[:id])
-    if @server && @server.update(server_params)
-        render '/api/servers/show'
+      render :show
     else
       render json: @server.errors.full_messages, status: 422
     end
   end
 
-  def destroy
+  def index 
+    @servers = Server.all
+    render :index
+  end
+
+  def show 
     @server = Server.find(params[:id])
-    if current_user.id == @server.owner_id
-      @server.destroy
-      render '/api/servers/show'
-    end
+    render :show
   end
 
-  private
+  # create delete ...
 
-  def server_params
-    params.require(:server).permit(:name)
+  def servers_params
+    params.require(:server).permit(:name, :owner_id)
   end
-
 end

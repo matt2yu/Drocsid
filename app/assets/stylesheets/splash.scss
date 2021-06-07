@@ -17,6 +17,18 @@
   position: absolute;
 }
 
+.splash-home {
+  font-family: Whitney, 'Helvetica Neue', Helvetica,Arial, sans-serif;
+  font-size: 20px;
+  width: 200px;
+  height: 40px;
+  background-color: #25262e;
+  color: white;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 40px;
+}
+
 .nav-bar {
   display: flex;
   justify-content: space-evenly;
@@ -96,13 +108,14 @@
   width: 100px;
   height: 30px;
   text-align: center;
+  align-items: center;
   margin: auto;
   border-radius: 10px;
   background-color: gray;
   color: white;
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 15px;
+  right: 15px;
   
 }
 

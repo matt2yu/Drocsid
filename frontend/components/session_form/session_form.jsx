@@ -15,6 +15,11 @@ class SessionForm extends React.Component {
     this.insertDemoUser = this.insertDemoUser.bind(this);
   }
 
+
+  ComponentDidMount() {
+    this.props.clearErrors();
+  }
+  
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
@@ -24,7 +29,9 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user);
+    this.props.processForm(user).then(() => {
+      this.props.history.push('/home')
+    });
   }
 
   renderErrors() {
@@ -42,7 +49,8 @@ class SessionForm extends React.Component {
 
   showEmailForSignUp() {
     if (this.props.formType ==='signup') {
-      return (<label>Email:
+      return (<label>EMAIL
+        <br />
         <input type="text"
           value={this.state.email}
           onChange={this.update('email')}
@@ -59,7 +67,7 @@ class SessionForm extends React.Component {
       username: 'demouser',
       password: 'password'
     });
-    this.props.processForm(demoAccount).then(() => this.props.history.push('/'))
+    this.props.processForm(demoAccount).then(() => this.props.history.push('/home'))
   }
 
   
@@ -68,8 +76,9 @@ class SessionForm extends React.Component {
         if (this.props.formType === 'login') {
           return (
             <div className='demo-login'>
-              <h2>Guest Demo Login</h2>
-              <button onClick={this.demoUser}>demo</button>
+              <h2 className='title-text'>Log in with QR Code</h2>
+              <p className='subtitle-text'>Scan this with the Drocsid mobile app to log in instantly.</p>
+              <button className='demo-button' onClick={this.demoUser}></button>
             </div>
           )
         }
@@ -79,15 +88,16 @@ class SessionForm extends React.Component {
     return (
       <div className="login-form-container">
         <form onSubmit={this.handleSubmit} className="login-form-box">
-          Welcome to Drocsid!
+          <h2 className='title-text'>Welcome back!</h2>
           <br/>
-          Please {this.props.formType} or {this.props.navLink}
+          <p className='subtitle-text'>We're so excited to see you again!</p>
           {this.renderErrors()}
           <div className="login-form">
             <br/>
             {this.showEmailForSignUp()}
             <br/>
-            <label>Username:
+            <label>USERNAME
+              <br/>
               <input type="text"
                 value={this.state.username}
                 onChange={this.update('username')}
@@ -95,15 +105,19 @@ class SessionForm extends React.Component {
               />
             </label>
             <br/>
-            <label>Password:
+            <label>PASSWORD
+            <br/>
               <input type="password"
                 value={this.state.password}
                 onChange={this.update('password')}
                 className="login-input"
               />
             </label>
+            <p>Forgot your password?</p>
             <br/>
             <input className="session-submit" type="submit" value={this.props.formType} />
+            <p>Need an Account? {this.props.navLink}</p> 
+            <br />
             {this.insertDemoUser()}
           </div>
         </form>
