@@ -43,3 +43,4 @@ class Api::ServersController < ApplicationController
   end
 
 end
+# test
