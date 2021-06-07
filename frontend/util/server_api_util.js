@@ -1,50 +1,30 @@
-export const fetchServers = () => {
-  return $.ajax({
-    method: 'GET',
-    url: '/api/browse/servers'
-  })
-};
+import $ from 'jquery'
 
-export const fetchServer = (serverId) => {
-  return $.ajax({
-    method: 'GET',
-    url: `/api/servers/${serverId}`
-  })
-};
-
-export const createServer = (server) => {
-  return $.ajax({
-    method: 'POST',
-    url: '/api/servers',
+export const createServer = server => (
+  $.ajax({
+    method: 'post',
+    url: 'api/servers',
     data: { server }
   })
-};
+)
 
-export const updateServer = (server) => {
-  return $.ajax({
-    method: 'PATCH',
-    url: `/api/servers/${server.id}`,
-    data: { server }
+export const deleteServer = serverId => (
+  $.ajax({
+    method: 'delete',
+    url: `api/servers/${serverId}`
   })
-};
+)
 
-export const deleteServer = (serverId) => {
-  return $.ajax({
-    method: 'DELETE',
-    url: `/api/servers/${serverId}`
+export const fetchServer = serverId => (
+  $.ajax({
+    method: 'get',
+    url: `api/servers/${serverId}`
   })
-};
+)
 
-export const fetchUserServers = (userId) => {
-  return $.ajax({
-    method: 'GET',
-    url: `/api/users/${userId}/servers`
+export const fetchServers = () => (
+  $.ajax({
+    method: 'get',
+    url: 'api/servers'
   })
-};
-
-export const fetchServerMembers = (serverId) => {
-  return $.ajax({
-    method: 'GET',
-    url: `/api/servers/${serverId}/users`
-  })
-};
+)

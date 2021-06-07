@@ -12,7 +12,7 @@ class User < ApplicationRecord
     foreign_key: :author_id,
     class_name: :Message
 
-  has_many :servers_owned,
+  has_many :servers,
     primary_key: :id,
     foreign_key: :owner_id,
     class_name: :Server

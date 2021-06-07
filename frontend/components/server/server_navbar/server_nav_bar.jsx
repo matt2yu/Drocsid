@@ -1,42 +1,41 @@
 import React from 'react';
-// import HomeButton from './HomeButton.jsx/HomeButton';
-// import ServerNavBarItem from './server_nav_bar_item';
-// import CreateServerButton from './create_server/CreateServerButton';
-// import ExploreServersButton from './explore_servers/ExploreServersButton';
+import { Link } from 'react-router-dom';
+
 
 class ServerNavBar extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      loading: true
+    }
+  }
 
-  }
-  
   componentDidMount() {
-    this.props.fetchAllServers(this.props.currentUser.id);
+    this.props.fetchServers()
+      .then(() => this.setState({loading: false}));
+    console.log(this.state);
   }
-  
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevProps.userServersIds !== this.props.userServersIds) {
-  //     this.props.fetchAllServers(this.props.currentUser.id);
-  //   }
-  // }
 
   render() {
-    if ((!Object.keys(this.props.allServers).length) || 
-    (!this.props.userServersIds.length)) {
-      return null;
+    let serverNames;
+    if (!this.props.loading) {
+      let servers = Object.values(this.props.servers);
+      serverNames = servers.map((server, i) => (
+        <li key={i}>
+          <Link to={`/servers/${server.id}`}>
+            {server.name}
+          </Link>
+        </li>
+      ));
     }
-    return(
-      <div className='navbar'>
-        {/* <HomeButton /> */}
-        <hr />
-        {/* {this.props.userServersIds.map(serverId => {
-          return <ServerNavBarItem 
-            key={serverId}
-            server={this.props.allServers[serverId]} />
-        })}  */}
-        {/* <CreateServerButton openModal={this.props.openModal} /> */}
-        {/* <ExploreServersButton openModal={this.props.openModal} /> */}
 
+
+    return (
+      <div>
+        <span>
+          List of my servers:
+        </span>
+        {serverNames}
       </div>
     )
   }

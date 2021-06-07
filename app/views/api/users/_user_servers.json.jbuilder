@@ -1,4 +1,4 @@
-user.servers_owned.each do |server|
+user.servers.each do |server|
   json.set! server.id do
     json.extract! server, :id, :name, :owner_id
   end

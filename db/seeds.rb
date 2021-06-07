@@ -22,11 +22,18 @@ demo_server = Server.create!(
   owner_id: demo_user.id
 )
 
+demo_server2 = Server.create!(
+  name: 'testserver2',
+  owner_id: demo_user.id
+)
+
+
+
 10.times {
 require 'faker'
   users << User.create!(
     email: Faker::Internet.email,
-    username: Faker::FunnyName.two_word_name,
+    username: Faker::FunnyName.name,
     password: Faker::Number.number(digits: 12)
   )
 }
