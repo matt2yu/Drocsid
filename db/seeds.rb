@@ -37,6 +37,26 @@ demo_channel1 = Channel.create!(
 
 demo_channel2 = Channel.create!(
   name: 'testchannel2',
+  server_id: demo_server.id
+)
+
+demo_channel3 = Channel.create!(
+  name: 'testchannel3',
+  server_id: demo_server.id
+)
+
+demo_channel4 = Channel.create!(
+  name: 'testchannel4',
+  server_id: demo_server2.id
+)
+
+demo_channel5 = Channel.create!(
+  name: 'testchannel5',
+  server_id: demo_server2.id
+)
+
+demo_channel6 = Channel.create!(
+  name: 'testchannel6',
   server_id: demo_server2.id
 )
 
