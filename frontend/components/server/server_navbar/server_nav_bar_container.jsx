@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { fetchAllServers, fetchServerMembers} from '../../../actions/server_actions';
+import {fetchAllServers, fetchServerMembers} from '../../../actions/server_actions';
 import { openModal } from '../../../actions/ui_actions';
 import ServerNavBar from './server_nav_bar';
 
@@ -24,5 +24,6 @@ const mDTP = dispatch => {
     // openModal: (modal) => dispatch(openModal(modal))
   })
 }
+
 
 export default withRouter(connect(mSTP, mDTP)(ServerNavBar));
