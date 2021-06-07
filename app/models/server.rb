@@ -6,6 +6,8 @@ class Server < ApplicationRecord
     foreign_key: :owner_id,
     class_name: :User
 
+  has_many :channels
+
   ### note: add after memberships is completed ###
   # has_many :members,
   #   through: :memberships,
