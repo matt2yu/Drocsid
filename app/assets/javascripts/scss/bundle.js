@@ -389,7 +389,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./session_form/login_form_container */ "./frontend/components/session_form/login_form_container.jsx");
 /* harmony import */ var _server_server_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./server/server_container */ "./frontend/components/server/server_container.jsx");
 /* harmony import */ var _server_server_item__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./server/server_item */ "./frontend/components/server/server_item.jsx");
-/* harmony import */ var _NotFoundPage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./NotFoundPage */ "./frontend/components/NotFoundPage.jsx");
+/* harmony import */ var _channel_channel_item__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./channel/channel_item */ "./frontend/components/channel/channel_item.jsx");
+/* harmony import */ var _channel_channel_item__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_channel_channel_item__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _NotFoundPage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./NotFoundPage */ "./frontend/components/NotFoundPage.jsx");
+
 
 
 
@@ -427,7 +430,7 @@ var App = function App() {
     component: _server_server_item__WEBPACK_IMPORTED_MODULE_9__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/404",
-    component: _NotFoundPage__WEBPACK_IMPORTED_MODULE_10__["default"]
+    component: _NotFoundPage__WEBPACK_IMPORTED_MODULE_11__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
     to: "/404"
   })));
@@ -562,6 +565,17 @@ var mSTP = function mSTP(_ref) {
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, {
   fetchChannels: _actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__["fetchChannels"]
 })(_channel__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/channel/channel_item.jsx":
+/*!******************************************************!*\
+  !*** ./frontend/components/channel/channel_item.jsx ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 

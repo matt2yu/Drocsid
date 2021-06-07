@@ -9,6 +9,7 @@ import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
 import ServerContainer from './server/server_container';
 import ServerItem from './server/server_item';
+import ChannelItem from './channel/channel_item'
 import NotFoundPage from './NotFoundPage'
 // import 
 
@@ -21,6 +22,7 @@ const App = () => (
       <ProtectedRoute path="/home" component={HomeContainer} />
       <ProtectedRoute exact path='/servers/' component={ServerContainer} />
       <ProtectedRoute path='/servers/:serverId' component={ServerItem} />
+      {/* <ProtectedRoute path='/servers/:serverId/channels/:channelId' component={ChannelItem} /> */}
       <Route path="/404" component={NotFoundPage} />
       <Redirect to="/404"/>
     </Switch>
