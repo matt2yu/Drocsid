@@ -9,6 +9,8 @@
 User.destroy_all
 Server.destroy_all
 
+ActiveRecord::Base.connection.reset_pk_sequence!('users')
+
 users = []
 
 demo_user = User.create!(
@@ -26,7 +28,6 @@ demo_server2 = Server.create!(
   name: 'testserver2',
   owner_id: demo_user.id
 )
-
 
 
 10.times {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ServerNavBarContainer from '../server/server_navbar/server_nav_bar_container';
+import ServerContainer from '../server/server_container';
 
 
 const Home = ({ currentUser }) => (
@@ -13,7 +13,7 @@ const Home = ({ currentUser }) => (
       </h2>
         <br />
         <h2>Server Nav Bar to show on left here </h2> 
-        <ServerNavBarContainer />
+        <ServerContainer />
         <br />
         <h2>Server buttons to show within nav bar  </h2> 
       <br /><br />

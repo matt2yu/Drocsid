@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ServerNavBarContainer from '../server/server_navbar/server_nav_bar_container';
+import Server from '../server/server_nav_bar/server_nav_bar_container';
 // import ServerChannelListContainer from '';
 // import ChannelContainer from '';
 
