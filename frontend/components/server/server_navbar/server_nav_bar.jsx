@@ -26,14 +26,14 @@ class ServerNavBar extends React.Component {
       return null;
     }
     return(
-      <div className={styles.sidebar}>
+      <div className='navbar'>
         {/* <HomeButton /> */}
         <hr />
         {/* {this.props.userServersIds.map(serverId => {
           return <ServerNavBarItem 
             key={serverId}
             server={this.props.allServers[serverId]} />
-        })} */}
+        })}  */}
         {/* <CreateServerButton openModal={this.props.openModal} /> */}
         {/* <ExploreServersButton openModal={this.props.openModal} /> */}
 
