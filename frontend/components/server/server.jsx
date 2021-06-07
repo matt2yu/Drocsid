@@ -35,7 +35,7 @@ class Server extends React.Component {
         <span>
           List of my servers:
         </span>
-        {serverNames}
+          {serverNames}
       </div>
     )
   }
