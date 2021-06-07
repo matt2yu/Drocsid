@@ -4,7 +4,7 @@ import ServerContainer from '../server/server_container';
 
 
 const Home = ({ currentUser }) => (
-  <div className=''>
+  <div className='home'>
     <div className=''>
       <h1>Welcome to Drocsid, {currentUser.username}</h1>
       <br />

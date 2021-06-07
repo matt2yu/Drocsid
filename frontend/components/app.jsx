@@ -5,7 +5,6 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
 import HomeContainer from './home/home_container';
 import SplashContainer from './splash/splash_container';
-// import MainContainer from './main/main_container';
 import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
 import ServerContainer from './server/server_container';
