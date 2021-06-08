@@ -30,6 +30,31 @@ demo_server2 = Server.create!(
   owner_id: demo_user.id
 )
 
+demo_server3 = Server.create!(
+  name: 'testserver3',
+  owner_id: demo_user.id
+)
+
+demo_server4 = Server.create!(
+  name: 'testserver4',
+  owner_id: demo_user.id
+)
+
+demo_server5 = Server.create!(
+  name: 'testserver5',
+  owner_id: demo_user.id
+)
+
+demo_server6 = Server.create!(
+  name: 'testserver6',
+  owner_id: demo_user.id
+)
+
+demo_server7 = Server.create!(
+  name: 'testserver7',
+  owner_id: demo_user.id
+)
+
 demo_channel1 = Channel.create!(
   name: 'testchannel1',
   server_id: demo_server.id
@@ -62,12 +87,12 @@ demo_channel6 = Channel.create!(
 
 
 # 10 random demo users
-10.times {
-require 'faker'
-  users << User.create!(
-    email: Faker::Internet.email,
-    username: Faker::FunnyName.name,
-    password: Faker::Number.number(digits: 12)
-  )
-}
+# 10.times {
+# require 'faker'
+#   users << User.create!(
+#     email: Faker::Internet.email,
+#     username: Faker::FunnyName.name,
+#     password: Faker::Number.number(digits: 12)
+#   )
+# }
 
