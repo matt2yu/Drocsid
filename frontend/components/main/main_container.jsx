@@ -7,7 +7,7 @@ import Server from '../server/server_nav_bar/server_nav_bar_container';
 
 const MainContainer = () => (
   <div className=''>
-    <ServerNavBarContainer />
+    <ServerContainer />
     {/* <ServerChannelListContainer /> */}
     {/* <ChannelContainer /> */}
   </div>

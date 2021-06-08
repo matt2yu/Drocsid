@@ -22,7 +22,7 @@ const App = () => (
       <ProtectedRoute path="/home" component={HomeContainer} />
       <ProtectedRoute exact path='/servers/' component={ServerContainer} />
       <ProtectedRoute path='/servers/:serverId' component={ServerItem} />
-      {/* <ProtectedRoute path='/servers/:serverId/channels/:channelId' component={ChannelItem} /> */}
+      <ProtectedRoute path='/servers/:serverId/channels/:channelId' component={ChannelItem} />
       <Route path="/404" component={NotFoundPage} />
       <Redirect to="/404"/>
     </Switch>
