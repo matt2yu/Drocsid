@@ -5,8 +5,11 @@ Rails.application.routes.draw do
     resources :servers, only: [:create, :destroy, :show, :index] do 
       resources :channels
     end
+
+    resources :messages, only: [:create, :update, :destroy]
   end
   
   root "static_pages#root"
+  mount ActionCable.server, at: '/cable'
 end
 
