@@ -14,7 +14,6 @@ class ChannelItem extends React.Component {
   }
 
   render() {
-    let channelId = this.state.id;
     return ( 
       <div> 
         <h1>Eventually messages, server container, and member list side bar container will all be in each channel </h1>
