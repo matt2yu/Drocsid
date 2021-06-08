@@ -555,10 +555,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mSTP = function mSTP(_ref) {
-  var _ref$entities = _ref.entities,
+  var session = _ref.session,
+      _ref$entities = _ref.entities,
+      users = _ref$entities.users,
       servers = _ref$entities.servers,
       channels = _ref$entities.channels;
   return {
+    currentUser: users[session.id],
     servers: servers,
     channels: channels
   };
