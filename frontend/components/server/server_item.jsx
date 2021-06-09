@@ -18,7 +18,7 @@ class ServerItem extends React.Component {
   render() {
     let serverId = this.state.id;
     return ( 
-      <div> 
+      <div className='server-item'> 
         <h1>Server Item - {serverId}</h1>
         <ChannelContainer serverId={serverId} />
       </div>

@@ -33,7 +33,7 @@ class Channel extends React.Component {
     }
 
     return (
-      <div>
+      <div className='channel'>
         <span>
           List of Channels:
           {channelNames}

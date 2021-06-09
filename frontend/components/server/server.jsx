@@ -31,7 +31,7 @@ class Server extends React.Component {
 
 
     return (
-      <div>
+      <div className='server'>
         <span>
           List of my servers:
         </span>

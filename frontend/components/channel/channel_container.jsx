@@ -4,8 +4,7 @@ import { logout } from '../../actions/session_actions';
 
 import Channel from './channel';
 
-const mSTP = ( {session, entities: { users, servers, channels }} ) => ({
-  currentUser: users[session.id],
+const mSTP = ( {session, entities: { servers, channels }} ) => ({
   servers,
   channels
 })
