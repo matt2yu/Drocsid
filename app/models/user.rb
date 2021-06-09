@@ -17,6 +17,9 @@ class User < ApplicationRecord
     foreign_key: :owner_id,
     class_name: :Server
 
+  has_many :channel_users, dependent: :destroy
+  has_many :channels, through: :channel_users
+
   
 
   attr_reader :password

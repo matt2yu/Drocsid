@@ -42536,3 +42536,186 @@ Processing by Api::ServersController#index as JSON
 Completed 200 OK in 9ms (Views: 7.7ms | ActiveRecord: 0.5ms)
 
 
+Started GET "/" for ::1 at 2021-06-09 15:34:30 -0500
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "50XzSLJ9a3YAReHFjOdRVA"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11
+  Rendered api/users/_user.json.jbuilder (0.3ms)
+  Rendered static_pages/root.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 20ms (Views: 18.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/servers" for ::1 at 2021-06-09 15:34:30 -0500
+Processing by Api::ServersController#index as JSON
+  Rendering api/servers/index.json.jbuilder
+  [1m[36mServer Load (0.4ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  ↳ app/views/api/servers/_servers.json.jbuilder:1
+  Rendered api/servers/_servers.json.jbuilder (2.1ms)
+  Rendered api/servers/index.json.jbuilder (2.9ms)
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for ::1 at 2021-06-09 15:34:31 -0500
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "50XzSLJ9a3YAReHFjOdRVA"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11
+  Rendered api/users/_user.json.jbuilder (0.3ms)
+  Rendered static_pages/root.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 25ms (Views: 23.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/servers" for ::1 at 2021-06-09 15:34:32 -0500
+Processing by Api::ServersController#index as JSON
+  Rendering api/servers/index.json.jbuilder
+  [1m[36mServer Load (0.4ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  ↳ app/views/api/servers/_servers.json.jbuilder:1
+  Rendered api/servers/_servers.json.jbuilder (1.3ms)
+  Rendered api/servers/index.json.jbuilder (1.8ms)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/servers/31/channels" for ::1 at 2021-06-09 15:34:33 -0500
+Processing by Api::ChannelsController#index as JSON
+  Parameters: {"server_id"=>"31"}
+  [1m[36mServer Load (0.3ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  ↳ app/controllers/api/channels_controller.rb:13
+  Rendering api/channels/index.json.jbuilder
+  [1m[36mChannel Load (0.3ms)[0m  [1m[34mSELECT "channels".* FROM "channels" WHERE "channels"."server_id" = $1[0m  [["server_id", 31]]
+  ↳ app/views/api/channels/_channels.json.jbuilder:1
+  Rendered api/channels/_channels.json.jbuilder (1.6ms)
+  Rendered api/channels/index.json.jbuilder (2.4ms)
+Completed 200 OK in 5ms (Views: 3.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/api/servers" for ::1 at 2021-06-09 15:34:34 -0500
+Processing by Api::ServersController#index as JSON
+  Rendering api/servers/index.json.jbuilder
+  [1m[36mServer Load (0.3ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  ↳ app/views/api/servers/_servers.json.jbuilder:1
+  Rendered api/servers/_servers.json.jbuilder (1.4ms)
+  Rendered api/servers/index.json.jbuilder (2.1ms)
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2021-06-09 15:34:45 -0500
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "50XzSLJ9a3YAReHFjOdRVA"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11
+  Rendered api/users/_user.json.jbuilder (0.3ms)
+  Rendered static_pages/root.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 24ms (Views: 22.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/api/servers" for ::1 at 2021-06-09 15:34:45 -0500
+Processing by Api::ServersController#index as JSON
+  Rendering api/servers/index.json.jbuilder
+  [1m[36mServer Load (0.3ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  ↳ app/views/api/servers/_servers.json.jbuilder:1
+  Rendered api/servers/_servers.json.jbuilder (1.4ms)
+  Rendered api/servers/index.json.jbuilder (2.1ms)
+Completed 200 OK in 4ms (Views: 3.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2021-06-09 15:34:46 -0500
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "50XzSLJ9a3YAReHFjOdRVA"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11
+  Rendered api/users/_user.json.jbuilder (0.5ms)
+  Rendered static_pages/root.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 23ms (Views: 22.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/api/servers" for ::1 at 2021-06-09 15:34:46 -0500
+Processing by Api::ServersController#index as JSON
+  Rendering api/servers/index.json.jbuilder
+  [1m[36mServer Load (0.3ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  ↳ app/views/api/servers/_servers.json.jbuilder:1
+  Rendered api/servers/_servers.json.jbuilder (1.2ms)
+  Rendered api/servers/index.json.jbuilder (1.8ms)
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2021-06-09 15:34:46 -0500
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "50XzSLJ9a3YAReHFjOdRVA"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11
+  Rendered api/users/_user.json.jbuilder (0.4ms)
+  Rendered static_pages/root.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 252ms (Views: 250.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/servers" for ::1 at 2021-06-09 15:34:47 -0500
+Processing by Api::ServersController#index as JSON
+  Rendering api/servers/index.json.jbuilder
+  [1m[36mServer Load (1.5ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  ↳ app/views/api/servers/_servers.json.jbuilder:1
+  Rendered api/servers/_servers.json.jbuilder (2.5ms)
+  Rendered api/servers/index.json.jbuilder (3.8ms)
+Completed 200 OK in 6ms (Views: 4.5ms | ActiveRecord: 1.5ms)
+
+
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(323612107325246355)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateChannelUsers (20210609203720)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (21.6ms)[0m  [1m[35mCREATE TABLE "channel_users" ("id" bigserial primary key, "channel_id" bigint, "user_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_2669d126e9"
+FOREIGN KEY ("channel_id")
+  REFERENCES "channels" ("id")
+, CONSTRAINT "fk_rails_89c7ea45bc"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  ↳ db/migrate/20210609203720_create_channel_users.rb:3
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE  INDEX  "index_channel_users_on_channel_id" ON "channel_users"  ("channel_id")[0m
+  ↳ db/migrate/20210609203720_create_channel_users.rb:3
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_channel_users_on_user_id" ON "channel_users"  ("user_id")[0m
+  ↳ db/migrate/20210609203720_create_channel_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210609203720"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(323612107325246355)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/api/servers/31/channels" for ::1 at 2021-06-09 15:56:48 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/matt2yu/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+Processing by Api::ChannelsController#index as JSON
+  Parameters: {"server_id"=>"31"}
+  [1m[36mServer Load (0.3ms)[0m  [1m[34mSELECT  "servers".* FROM "servers" WHERE "servers"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  ↳ app/controllers/api/channels_controller.rb:13
+  Rendering api/channels/index.json.jbuilder
+  [1m[36mChannel Load (0.3ms)[0m  [1m[34mSELECT "channels".* FROM "channels" WHERE "channels"."server_id" = $1[0m  [["server_id", 31]]
+  ↳ app/views/api/channels/_channels.json.jbuilder:1
+  Rendered api/channels/_channels.json.jbuilder (5.9ms)
+  Rendered api/channels/index.json.jbuilder (6.4ms)
+Completed 200 OK in 19ms (Views: 5.6ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/api/servers" for ::1 at 2021-06-09 15:56:48 -0500
+Processing by Api::ServersController#index as JSON
+  Rendering api/servers/index.json.jbuilder
+  [1m[36mServer Load (0.4ms)[0m  [1m[34mSELECT "servers".* FROM "servers"[0m
+  ↳ app/views/api/servers/_servers.json.jbuilder:1
+  Rendered api/servers/_servers.json.jbuilder (1.4ms)
+  Rendered api/servers/index.json.jbuilder (2.1ms)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.4ms)
+
+
