@@ -1,23 +1,27 @@
-import { connect } from "react-redux"
-import { requestAllMessages } from "../../actions/message_actions"
-import { requestAllUsers } from "../../actions/user_actions"
-import ChatRoom from "./chat_room"
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import { receiveMessage, receiveChannelMessages } from '../../actions/message_actions';
+import { getChannelMessages } from '../../util/message_api_util'
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    channel: state.entities.channels[ownProps.match.params.channelId],
-    currentUser: state.entities.users[state.session.id],
+import ChatRoom from './chat_room';
+
+const mSTP = (state, ownProps) => {
+  // debugger
+  return({
+    chatType: "Channel",
+    chat: state.entities.channels[ownProps.match.params.channelId],
+    currentServerId: ownProps.match.params.serverId,
     users: state.entities.users,
-    messages: Object.values(state.entities.messages)
-  }
+    currentUser: state.entities.currentUser[state.session.session.id],
+    messages: getChannelMessages(state, ownProps.match.params.channelId)
+  })
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    requestAllMessages: (channelId) => dispatch(requestAllMessages(channelId)),
-    requestAllUsers: (channelId) => dispatch(requestAllUsers(channelId))
-  }
+const mDTP = dispatch => {
+  return({
+    receiveMessage: message => dispatch(receiveMessage(message)),
+    receiveChannelMessages: messages => dispatch(receiveChannelMessages(messages)),
+  })
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChatRoom)
+export default withRouter(connect(mSTP, mDTP)(ChatRoom));

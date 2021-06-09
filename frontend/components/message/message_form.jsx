@@ -1,23 +1,48 @@
-import { connect } from "react-redux"
-import { requestAllMessages } from "../../actions/message_actions"
-import { requestAllUsers } from "../../actions/user_actions"
-import ChatRoom from "./chat_room"
+import React from 'react';
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    channel: state.entities.channels[ownProps.match.params.channelId],
-    currentUser: state.entities.users[state.session.id],
-    users: state.entities.users,
-    messages: Object.values(state.entities.messages)
+class MessageForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = this.props.message; // {body: "", authorId: 1 }
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  update(field) {
+    return e => this.setState({
+      [field]: e.target.value
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.subscription.speak({ 
+      message: this.state
+    });
+    this.setState({
+       body: "" 
+    });
+  }  
+
+  render() {
+    return(
+      <div className={styles['message-wrapper']}>
+        <form 
+          className={styles['message-form']}
+          onSubmit={this.handleSubmit}>
+          <input 
+            className={styles['message-input']}
+            type="text"
+            value={this.state.body}
+            onChange={this.update('body')}
+            placeholder={`Message ${this.props.chat.title}`}
+          />
+          <button type="submit"></button>
+        </form>
+      </div>
+    )
+  }
+
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    requestAllMessages: (channelId) => dispatch(requestAllMessages(channelId)),
-    requestAllUsers: (channelId) => dispatch(requestAllUsers(channelId))
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChatRoom)
+export default MessageForm;

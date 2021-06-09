@@ -1,5 +1,6 @@
 import React from 'react';
 import ServerContainer from '../server/server_container';
+import ChatRoomContainer from '../message/chat_room_container';
 // import ChannelContainer from '.channel_container';
 import ChannelMemberList from './channel_member_list';
 
@@ -23,6 +24,7 @@ class ChannelItem extends React.Component {
       <div className='channel-item'> 
         <ServerContainer />
         <br />
+        <ChatRoomContainer />
         {/* <ChannelContainer serverId={serverId} /> */}
         {/* <ChannelMemberList /> */}
         <br />

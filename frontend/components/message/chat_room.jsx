@@ -1,147 +1,74 @@
-import React from "react";
-import MessageForm from "./message_form";
+import React from 'react';
+import MessageFormContainer from './message_form_container';
+import Message from './message';
 
-class ChatRoom extends React.Component{
-  constructor(props){
+class ChatRoom extends React.Component {
+  constructor(props) {
     super(props);
-    this.state = {newMessages: 0 };
     this.bottom = React.createRef();
-
-    
-  }
-
-  componentDidMount(){
-
-    
-    // this.setState({
-    //   messages: this.props.messages.slice()
-    // })
-    
-    this.props.requestAllMessages(this.props.channel.id)
-    this.subscription = App.cable.subscriptions.create(
-      { 
-        channel: 'ChatChannel',
-        type: 'Channel',
-        chatId: this.props.channel.id,
+    this.subscription = App.cable.subscriptions.create({ 
+        channel: "ChatChannel",
+        type: this.props.chatType,
+        chatId: this.props.chat.id
       },
       {
         received: data => {
-          this.setState.call(this, ({
-            newMessages: this.state.newMessages + 1}));
-          // this.props.requestAllMessages(this.props.channel.id)
+          switch (data.type) {
+            case "receive_message":
+              this.props.receiveMessage(data.message);
+            break;
+            case "receive_messages":
+              this.props.receiveChannelMessages(data.messages);
+              break;
+          }
         },
         speak: data => {
           return this.subscription.perform("speak", data);
         },
-        // load: () => {
-        //   return this.subscription.perform("load");
-        // },
-        // unsubscribed: () => {
-        //   return this.subscription.perform("unsubscribed");
-        // }
       }
     );
   }
 
-  // loadChat(e) {
-  //   e.preventDefault();
-  //   this.subscription.load();
-  // }
-
-  // handleUpdate(){
-  //   this.setState({
-  //     messages: this.props.messages.slice()
-  //   })
-  // }
-
-  componentDidUpdate() {
-  
-    if(this.state.newMessages > 0){
-      this.setState({
-        newMessages: 0
-      })
-      this.props.requestAllUsers(this.props.channel.id)
-      this.props.requestAllMessages(this.props.channel.id)
-    }
-    if(this.bottom.current){
+  componentDidUpdate(prevProps, prevState) {
+    if (this.bottom.current) {
       this.bottom.current.scrollIntoView();
     }
   }
 
-  componentWillUnmount(){
-    // this.subscription.unsubscribed()
+  componentWillUnmount() {
+    App.cable.subscriptions.remove(this.subscription);
   }
 
-  render(){
-    // if(this.state.messages[0] !== this.props.messages[0]){
-    //   this.handleUpdate()
-    // }
-    // const messageList = this.state.messages.map((message)=>{
-    //   return (
-    //     <MessageListItem message={message} users={this.props.users} bottom={this.bottom}/>
-    //   );
-    // });
-    // let channelView = (<ul className="message-list" ref={this.bottom}></ul>);
-    // if(this.state.messages[0] === this.props.messages[0]){
-    //   channelView = (
-    //     <ul className="message-list" ref={this.bottom}>
-    //       {this.state.messages.map((message) => {
-    //         let user = (lastUser === this.props.users[message.userId]) ?
-    //         <></> : <h1>{this.props.users[message.userId].displayName}</h1>;
-    //         lastUser = this.props.users[message.userId]
-    //         return (
-    //           <li key={message.id}>
-    //             {user}
-    //             <p>{message.body}</p>
-    //             <p>channel {message.messageableId}</p>
-    //             <div ref={this.bottom} />
-    //           </li>
-    //         )
-    //       })}
-    //     </ul>
-    //   )
-    // }
+  render() {
+    let messageList;
+    if (Object.keys(this.props.users).length) {
+      messageList = (this.props.messages.length) ?
+        this.props.messages.map(message => {
+            return <Message 
+              key={message.id}
+              message={message}
+              username={this.props.users[message.authorId].username}
+              bottom={this.bottom}
+            />
+        }) : (
+          <div className=''>
+            <h1>Welcome to {this.props.chat.name}!</h1>
+          </div>
+        )
+    } else {
+      return <div className=''>Loading...</div>
+    }
 
-    let lastUser;
-    let lastDate;
-    let messagesList = this.props.messages.slice();
-    messagesList.reverse()
-    return(
-      <div className="chatroom-container">
-          <ul className="message-list">
-            {this.props.messages.map((message, idx) => {
-              if(this.props.users[message.userId]){
-                let className = (lastDate === extractDate(message.createdAt)) || idx == 0 ? "" : "first";
-                let user = (lastUser === this.props.users[message.userId]) &&
-                (lastDate === extractDate(message.createdAt)) ?
-                <></> : <div className={"name-and-date"}>
-                          <h1>{this.props.users[message.userId].displayName}</h1>
-                          <h5>{extractDateTime(message.createdAt)}</h5>
-                        </div>;
-                let img = (lastUser === this.props.users[message.userId])&&
-                (lastDate === extractDate(message.createdAt)) ?
-                <div className="avatar"/> : <img src={window.defaultAvatar} alt="avatar" className="avatar" />;
-                lastUser = this.props.users[message.userId];
-                lastDate = extractDate(message.createdAt);
-                return (
-                  <li key={message.id} className={className}>
-                    {img}
-                    <div className="message-container">
-                      {user}
-                      <p>{message.body}</p>
-                      <div ref={this.bottom} />
-                    </div>
-                  </li>
-                )
-                
-              }
-            })}
-          </ul>
-        <MessageForm channel={this.props.channel} subscription={this.subscription} currentUser={this.props.currentUser}/>
+    return (
+      <div className=''>
+        <div className=''>
+          {messageList}
+        </div>
+        <MessageFormContainer 
+          subscription={this.subscription} />
       </div>
     )
-  }
+  } 
 }
 
-
-export default ChatRoom;
+export default ChatRoom; 

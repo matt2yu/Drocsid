@@ -10,7 +10,7 @@ class ChatChannel < ApplicationCable::Channel
       body: data['message']['body'],
       author_id: data['message']['authorId'],
       messageable_id: @chat.id,
-      messageable_type: "Channel"
+      messageable_type: @chat
     )
     if @message.save
       socket = { 
@@ -28,12 +28,5 @@ class ChatChannel < ApplicationCable::Channel
       ChatChannel.broadcast_to(@chat, socket)
     end
   end
-  def load
-    messages = Message.where(messageable_id: @chat.id).limit(5).order(:created_at)
-    socket = { messages: messages, type: 'messages' }
-    ChatChannel.broadcast_to(@chat, socket)
-  end
 
-  def unsubscribed
-  end
 end
