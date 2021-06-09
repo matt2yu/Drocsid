@@ -1,48 +1,43 @@
-import React from 'react';
+import React from "react";
 
 class MessageForm extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = this.props.message; // {body: "", authorId: 1 }
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = { body: "" };
   }
-
+  
   update(field) {
-    return e => this.setState({
-      [field]: e.target.value
-    });
+    return e =>
+      this.setState({ [field]: e.currentTarget.value });
   }
-
+  
   handleSubmit(e) {
     e.preventDefault();
-    this.props.subscription.speak({ 
-      message: this.state
+    App.cable.subscriptions.subscriptions[0].speak({ 
+      body: this.state.body,
+      messageable_id: this.props.match.params.channelId, 
+      messageable_type: "Channel", 
+      author_id: this.props.currentUser.id
     });
-    this.setState({
-       body: "" 
-    });
-  }  
-
+    this.setState({ body: "" });
+  }
+  
   render() {
-    return(
-      <div className={styles['message-wrapper']}>
-        <form 
-          className={styles['message-form']}
-          onSubmit={this.handleSubmit}>
-          <input 
-            className={styles['message-input']}
+    return (
+      <>
+        <form className="message-form" onSubmit={this.handleSubmit.bind(this)}>
+          <input
+            className="message-form-body"
             type="text"
             value={this.state.body}
-            onChange={this.update('body')}
-            placeholder={`Message ${this.props.chat.title}`}
+            onChange={this.update("body")}
+            placeholder={`Message #${this.props.currentChannel}`}
           />
-          <button type="submit"></button>
+          {/* <input type="submit" /> */}
         </form>
-      </div>
-    )
+      </>
+    );
   }
-
 }
 
 export default MessageForm;

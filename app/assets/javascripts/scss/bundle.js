@@ -156,37 +156,66 @@ var deleteChannel = function deleteChannel(serverId, channel) {
 /*!*********************************************!*\
   !*** ./frontend/actions/message_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CHANNEL_MESSAGES, RECEIVE_MESSAGE, receiveChannelMessages, receiveMessage, fetchChannelMessages, createMessage */
+/*! exports provided: RECEIVE_ALL_MESSAGES, RECEIVE_MESSAGE, REMOVE_MESSAGE, CLEAR_MESSAGES, clearMessages, fetchMessages, fetchMessage, createMessage, updateMessage, deleteMessage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CHANNEL_MESSAGES", function() { return RECEIVE_CHANNEL_MESSAGES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_MESSAGES", function() { return RECEIVE_ALL_MESSAGES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_MESSAGE", function() { return RECEIVE_MESSAGE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveChannelMessages", function() { return receiveChannelMessages; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveMessage", function() { return receiveMessage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchChannelMessages", function() { return fetchChannelMessages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_MESSAGE", function() { return REMOVE_MESSAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_MESSAGES", function() { return CLEAR_MESSAGES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearMessages", function() { return clearMessages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessages", function() { return fetchMessages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessage", function() { return fetchMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createMessage", function() { return createMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateMessage", function() { return updateMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteMessage", function() { return deleteMessage; });
 /* harmony import */ var _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/message_api_util */ "./frontend/util/message_api_util.jsx");
 
-var RECEIVE_CHANNEL_MESSAGES = "RECEIVE_CHANNEL_MESSAGES";
-var RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
-var receiveChannelMessages = function receiveChannelMessages(messages) {
+var RECEIVE_ALL_MESSAGES = 'RECEIVE_ALL_MESSAGES';
+var RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
+var REMOVE_MESSAGE = 'REMOVE_MESSAGE';
+var CLEAR_MESSAGES = 'CLEAR_MESSAGES';
+
+var receiveMessages = function receiveMessages(messages) {
   return {
-    type: RECEIVE_CHANNEL_MESSAGES,
+    type: RECEIVE_ALL_MESSAGES,
     messages: messages
   };
 };
+
 var receiveMessage = function receiveMessage(message) {
   return {
     type: RECEIVE_MESSAGE,
     message: message
   };
+}; // 
+
+
+var removeMessage = function removeMessage(messageId) {
+  return {
+    type: REMOVE_MESSAGE,
+    messageId: messageId
+  };
 };
-var fetchChannelMessages = function fetchChannelMessages(channelId) {
+
+var clearMessages = function clearMessages() {
+  return {
+    type: CLEAR_MESSAGES
+  };
+};
+var fetchMessages = function fetchMessages(channelId) {
   return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchChannelMessages"](channelId).then(function (messages) {
-      return dispatch(receiveChannelMessages(messages));
+    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchMessages"](channelId).then(function (messages) {
+      return dispatch(receiveMessages(messages));
+    });
+  };
+};
+var fetchMessage = function fetchMessage(messageId) {
+  return function (dispatch) {
+    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchMessage"](messageId).then(function (message) {
+      return dispatch(receiveMessage(message));
     });
   };
 };
@@ -194,6 +223,21 @@ var createMessage = function createMessage(message) {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__["createMessage"](message).then(function (message) {
       return dispatch(receiveMessage(message));
+    });
+  };
+}; // 
+
+var updateMessage = function updateMessage(message) {
+  return function (dispatch) {
+    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__["updateMessage"](message).then(function (message) {
+      return dispatch(receiveMessage(message));
+    });
+  };
+};
+var deleteMessage = function deleteMessage(messageId) {
+  return function (dispatch) {
+    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteMessage"](messageId).then(function () {
+      return dispatch(removeMessage(messageId));
     });
   };
 };
@@ -642,7 +686,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _server_server_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../server/server_container */ "./frontend/components/server/server_container.jsx");
-/* harmony import */ var _message_chat_room_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../message/chat_room_container */ "./frontend/components/message/chat_room_container.jsx");
+/* harmony import */ var _message_chat_room__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../message/chat_room */ "./frontend/components/message/chat_room.jsx");
 /* harmony import */ var _channel_member_list__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./channel_member_list */ "./frontend/components/channel/channel_member_list.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -668,7 +712,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
- // import ChannelContainer from '.channel_container';
 
 
 
@@ -703,7 +746,7 @@ var ChannelItem = /*#__PURE__*/function (_React$Component) {
       var serverId = this.state.id;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_server_server_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_chat_room_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Eventually messages, server container, and member list side bar container will all be in each channel "));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_server_server_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_chat_room__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Eventually messages, server container, and member list side bar container will all be in each channel "));
     }
   }]);
 
@@ -785,8 +828,8 @@ var ChannelMemberList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var memberNames;
-      var memberId = this.props.serverId;
+      var channelNames;
+      var channelId = this.props.channelId;
 
       if (!this.state.loading) {
         var channels = Object.values(this.props.channels);
@@ -884,9 +927,14 @@ var mapStateToProps = function mapStateToProps(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _message_form_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_form_container */ "./frontend/components/message/message_form_container.js");
-/* harmony import */ var _message__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message */ "./frontend/components/message/message.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
+/* harmony import */ var _message_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./message_form */ "./frontend/components/message/message_form.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -910,6 +958,10 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+ // import { fetchUsers } from '../../actions/user_actions';
+
+
+
 
 
 var ChatRoom = /*#__PURE__*/function (_React$Component) {
@@ -924,164 +976,156 @@ var ChatRoom = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
-    _this.subscription = App.cable.subscriptions.create({
-      channel: "ChatChannel",
-      type: _this.props.chatType,
-      chatId: _this.props.chat.id
-    }, {
-      received: function received(data) {
-        switch (data.type) {
-          case "receive_message":
-            _this.props.receiveMessage(data.message);
-
-            break;
-
-          case "receive_messages":
-            _this.props.receiveChannelMessages(data.messages);
-
-            break;
-        }
-      },
-      speak: function speak(data) {
-        return _this.subscription.perform("speak", data);
-      }
-    });
     return _this;
   }
 
   _createClass(ChatRoom, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps, prevState) {
-      if (this.bottom.current) {
-        this.bottom.current.scrollIntoView();
-      }
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var fetchMessage = this.props.fetchMessage.bind(this);
+      this.props.fetchMessages();
+      this.props.fetchUsers();
+      App.cable.subscriptions.create({
+        channel: "ChatChannel",
+        channelId: this.props.match.params.channelId
+      }, {
+        received: function received(data) {
+          fetchMessage(data.id);
+        },
+        speak: function speak(data) {
+          return this.perform("speak", data);
+        },
+        load: function load() {
+          return this.perform("load");
+        }
+      });
     }
   }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      App.cable.subscriptions.remove(this.subscription);
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.bottom.current.scrollIntoView();
+    }
+  }, {
+    key: "currentMessages",
+    value: function currentMessages() {
+      var messages = this.props.messages;
+      var channelId = this.props.channelId;
+      var channelMessages = [];
+
+      if (messages.length > 0) {
+        channelMessages = messages.filter(function (message) {
+          return message.channel_id === channelId;
+        });
+      }
+
+      return channelMessages;
     }
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      var messageList;
+      var messageList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "message-container"
+      }, "no messages here yet"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        ref: this.bottom
+      }));
+      var currentChannelMessages = this.currentMessages();
 
-      if (Object.keys(this.props.users).length) {
-        messageList = this.props.messages.length ? this.props.messages.map(function (message) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            key: message.id,
-            message: message,
-            username: _this2.props.users[message.authorId].username,
-            bottom: _this2.bottom
-          });
-        }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: ""
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Welcome to ", this.props.chat.name, "!"));
+      if (currentChannelMessages.length > 0) {
+        messageList = currentChannelMessages.map(function (message, idx) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: message.id
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "message-container"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+            className: "message-avatar",
+            src: message.avatar
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "message-body"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "message-author"
+          }, message.author), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, message.body))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            ref: _this2.bottom
+          }));
+        });
+      }
+
+      var channels = this.props.channels;
+      var display;
+
+      if (channels.length < 1) {
+        display = "";
       } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: ""
-        }, "Loading...");
+        var channel = channels.find(function (channel) {
+          return channel.id === parseInt(_this2.props.match.params.channelId);
+        });
+
+        if (channel) {
+          display = channel.name;
+        }
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: ""
+        className: "chatroom-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: ""
-      }, messageList), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_form_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        subscription: this.subscription
-      }));
+        className: "chatroom-channel"
+      }, "# ", display), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "message-list"
+      }, messageList), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_form__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, this.props, {
+        currentChannel: display
+      })));
     }
   }]);
 
   return ChatRoom;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (ChatRoom);
-
-/***/ }),
-
-/***/ "./frontend/components/message/chat_room_container.jsx":
-/*!*************************************************************!*\
-  !*** ./frontend/components/message/chat_room_container.jsx ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
-/* harmony import */ var _util_message_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/message_api_util */ "./frontend/util/message_api_util.jsx");
-/* harmony import */ var _chat_room__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chat_room */ "./frontend/components/message/chat_room.jsx");
-
-
-
-
-
-
 var mSTP = function mSTP(state, ownProps) {
-  // debugger
+  var channelId = parseInt(ownProps.match.params.channelId);
   return {
-    chatType: "Channel",
-    chat: state.entities.channels[ownProps.match.params.channelId],
-    currentServerId: ownProps.match.params.serverId,
-    users: state.entities.users,
-    currentUser: state.entities.currentUser[state.session.session.id],
-    messages: Object(_util_message_api_util__WEBPACK_IMPORTED_MODULE_3__["getChannelMessages"])(state, ownProps.match.params.channelId)
+    channelId: channelId,
+    currentUser: state.entities.users[state.session.id],
+    messages: Object.values(state.entities.messages),
+    users: Object.values(state.entities.users),
+    channels: Object.values(state.entities.channels)
   };
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
-    receiveMessage: function receiveMessage(message) {
-      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__["receiveMessage"])(message));
+    fetchUsers: function (_fetchUsers) {
+      function fetchUsers() {
+        return _fetchUsers.apply(this, arguments);
+      }
+
+      fetchUsers.toString = function () {
+        return _fetchUsers.toString();
+      };
+
+      return fetchUsers;
+    }(function () {
+      return dispatch(fetchUsers());
+    }),
+    fetchChannels: function fetchChannels() {
+      return dispatch(Object(_actions_channel_actions__WEBPACK_IMPORTED_MODULE_4__["fetchChannels"])());
     },
-    receiveChannelMessages: function receiveChannelMessages(messages) {
-      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__["receiveChannelMessages"])(messages));
+    fetchMessages: function fetchMessages() {
+      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__["fetchMessages"])());
+    },
+    fetchMessage: function fetchMessage(message) {
+      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__["fetchMessage"])(message));
+    },
+    createMessage: function createMessage(message) {
+      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__["createMessage"])(message));
+    },
+    deleteMessage: function deleteMessage(id) {
+      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__["deleteMessage"])(id));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_chat_room__WEBPACK_IMPORTED_MODULE_4__["default"])));
-
-/***/ }),
-
-/***/ "./frontend/components/message/message.jsx":
-/*!*************************************************!*\
-  !*** ./frontend/components/message/message.jsx ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _util_selectors_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/selectors_api_util */ "./frontend/util/selectors_api_util.jsx");
-
-
-
-var Message = function Message(_ref) {
-  var message = _ref.message,
-      username = _ref.username,
-      bottom = _ref.bottom;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: styles.message
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: styles['msg-username']
-  }, username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: styles['msg-date']
-  }, Object(_util_selectors_api_util__WEBPACK_IMPORTED_MODULE_1__["convertDateString"])(message.createdAt)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: styles['msg-content']
-  }, message.body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    ref: bottom
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Message);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mSTP, mDTP)(ChatRoom)));
 
 /***/ }),
 
@@ -1133,9 +1177,9 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MessageForm);
 
     _this = _super.call(this, props);
-    _this.state = _this.props.message; // {body: "", authorId: 1 }
-
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.state = {
+      body: ""
+    };
     return _this;
   }
 
@@ -1145,15 +1189,18 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.target.value));
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
       };
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.subscription.speak({
-        message: this.state
+      App.cable.subscriptions.subscriptions[0].speak({
+        body: this.state.body,
+        messageable_id: this.props.match.params.channelId,
+        messageable_type: "Channel",
+        author_id: this.props.currentUser.id
       });
       this.setState({
         body: ""
@@ -1162,19 +1209,15 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: styles['message-wrapper']
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: styles['message-form'],
-        onSubmit: this.handleSubmit
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "message-form",
+        onSubmit: this.handleSubmit.bind(this)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: styles['message-input'],
+        className: "message-form-body",
         type: "text",
         value: this.state.body,
-        onChange: this.update('body'),
-        placeholder: "Message ".concat(this.props.chat.title)
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "submit"
+        onChange: this.update("body"),
+        placeholder: "Message #".concat(this.props.currentChannel)
       })));
     }
   }]);
@@ -1183,40 +1226,6 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (MessageForm);
-
-/***/ }),
-
-/***/ "./frontend/components/message/message_form_container.js":
-/*!***************************************************************!*\
-  !*** ./frontend/components/message/message_form_container.js ***!
-  \***************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _message_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message_form */ "./frontend/components/message/message_form.jsx");
-
-
-
-
-var mSTP = function mSTP(state, ownProps) {
-  return {
-    message: {
-      body: "",
-      authorId: state.session.session.id
-    },
-    chat: state.entities.channels[ownProps.match.params.channelId]
-  };
-}; // const mDTP = dispatch => {
-//   return({
-//   })
-// }
-
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, null)(_message_form__WEBPACK_IMPORTED_MODULE_2__["default"])));
 
 /***/ }),
 
@@ -2034,24 +2043,31 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/message_actions */ "./frontend/actions/message_actions.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 var messagesReducer = function messagesReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
+  Object.freeze(oldState);
+  var newState = Object.assign({}, oldState);
 
   switch (action.type) {
-    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CHANNEL_MESSAGES"]:
+    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_MESSAGES"]:
       return action.messages;
 
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_MESSAGE"]:
-      return Object.assign({}, state, _defineProperty({}, action.message.id, action.message));
+      newState[action.message.id] = action.message;
+      return newState;
+
+    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_MESSAGE"]:
+      delete newState[action.messageId];
+      return newState;
+
+    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_MESSAGES"]:
+      return [];
 
     default:
-      return state;
+      return oldState;
   }
 };
 
@@ -2309,33 +2325,54 @@ var fetchChannels = function fetchChannels(serverId) {
 /*!********************************************!*\
   !*** ./frontend/util/message_api_util.jsx ***!
   \********************************************/
-/*! exports provided: getChannelMessages, fetchChannelMessages, createMessage */
+/*! exports provided: fetchMessages, fetchMessage, createMessage, updateMessage, deleteMessage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getChannelMessages", function() { return getChannelMessages; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchChannelMessages", function() { return fetchChannelMessages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessages", function() { return fetchMessages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMessage", function() { return fetchMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createMessage", function() { return createMessage; });
-var getChannelMessages = function getChannelMessages(state, channelId) {
-  var channelMessages = Object.values(state.entities.messages).filter(function (message) {
-    return message.messageableId == channelId;
-  });
-  return channelMessages;
-};
-var fetchChannelMessages = function fetchChannelMessages(channelId) {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateMessage", function() { return updateMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteMessage", function() { return deleteMessage; });
+var fetchMessages = function fetchMessages(channelId) {
   return $.ajax({
     method: 'GET',
-    url: "/api/channels/".concat(channelId, "/messages")
+    url: "/api/messages",
+    data: {
+      messageable_type: "Channel",
+      messageable_id: "".concat(channelId)
+    }
+  });
+};
+var fetchMessage = function fetchMessage(messageId) {
+  return $.ajax({
+    method: 'GET',
+    url: "/api/messages/".concat(messageId)
   });
 };
 var createMessage = function createMessage(message) {
   return $.ajax({
     method: 'POST',
-    url: '/api/messages',
+    url: "/api/messages",
     data: {
       message: message
     }
+  });
+};
+var updateMessage = function updateMessage(message) {
+  return $.ajax({
+    method: 'PATCH',
+    url: "/api/messages/".concat(message.id),
+    data: {
+      message: message
+    }
+  });
+};
+var deleteMessage = function deleteMessage(messageId) {
+  return $.ajax({
+    method: 'DELETE',
+    url: "/api/messages/".concat(messageId)
   });
 };
 
@@ -2400,57 +2437,6 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var AuthRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Auth));
 var ProtectedRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Protected));
-
-/***/ }),
-
-/***/ "./frontend/util/selectors_api_util.jsx":
-/*!**********************************************!*\
-  !*** ./frontend/util/selectors_api_util.jsx ***!
-  \**********************************************/
-/*! exports provided: convertDateString */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "convertDateString", function() { return convertDateString; });
-var convertDateString = function convertDateString(date) {
-  var msgDate = new Date(date);
-  var msgYear = msgDate.getFullYear();
-  var msgMonth = msgDate.getMonth() + 1;
-  var msgDay = msgDate.getDate();
-  var newDate = "".concat(msgMonth, "/").concat(msgDay, "/").concat(msgYear); // "05/19/2021"
-
-  var hr = msgDate.getHours();
-  var min = msgDate.getMinutes();
-  var AMPM = 'AM';
-
-  if (hr > 12) {
-    hr -= 12;
-    AMPM = 'PM';
-  } else if (hr == 0) {
-    hr += 12;
-  }
-
-  if (min < 10) {
-    min = "0" + min;
-  }
-
-  var msgTime = "".concat(hr, ":").concat(min, " ").concat(AMPM);
-  var currDate = new Date();
-  var currYear = currDate.getFullYear();
-  var currMonth = currDate.getMonth() + 1;
-  var currDay = currDate.getDate();
-
-  if (currYear === msgYear && currMonth === msgMonth && currDay === msgDay) {
-    return "Today at ".concat(msgTime);
-  }
-
-  if (currYear === msgYear && currMonth === msgMonth && currDay === msgDay + 1) {
-    return "Yesterday at ".concat(msgTime);
-  }
-
-  return newDate;
-};
 
 /***/ }),
 

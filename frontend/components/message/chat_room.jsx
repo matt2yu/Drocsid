@@ -1,74 +1,129 @@
-import React from 'react';
-import MessageFormContainer from './message_form_container';
-import Message from './message';
+import React from "react";
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+// import { fetchUsers } from '../../actions/user_actions';
+import { fetchMessages, deleteMessage, createMessage, fetchMessage } from '../../actions/message_actions';
+import { fetchChannels } from '../../actions/channel_actions';
+import MessageForm from "./message_form";
 
 class ChatRoom extends React.Component {
   constructor(props) {
     super(props);
+
     this.bottom = React.createRef();
-    this.subscription = App.cable.subscriptions.create({ 
-        channel: "ChatChannel",
-        type: this.props.chatType,
-        chatId: this.props.chat.id
-      },
+  }
+  
+  componentDidMount() {
+    let fetchMessage = this.props.fetchMessage.bind(this);
+    this.props.fetchMessages();
+    this.props.fetchUsers();
+
+    App.cable.subscriptions.create(
+      { channel: "ChatChannel", channelId: this.props.match.params.channelId },
       {
         received: data => {
-          switch (data.type) {
-            case "receive_message":
-              this.props.receiveMessage(data.message);
-            break;
-            case "receive_messages":
-              this.props.receiveChannelMessages(data.messages);
-              break;
-          }
+          fetchMessage(data.id);
         },
-        speak: data => {
-          return this.subscription.perform("speak", data);
+        speak: function(data) {
+          return this.perform("speak", data)
         },
+      load: function() {return this.perform("load")}
       }
     );
   }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.bottom.current) {
-      this.bottom.current.scrollIntoView();
-    }
+  
+  componentDidUpdate() {
+    this.bottom.current.scrollIntoView();
   }
+  
+  currentMessages() {
+    let messages = this.props.messages;
+    let channelId = this.props.channelId;
 
-  componentWillUnmount() {
-    App.cable.subscriptions.remove(this.subscription);
+    let channelMessages = [];
+    if (messages.length > 0) {
+      channelMessages = messages.filter(message => (message.channel_id === channelId))
+    }
+    return channelMessages;
   }
 
   render() {
-    let messageList;
-    if (Object.keys(this.props.users).length) {
-      messageList = (this.props.messages.length) ?
-        this.props.messages.map(message => {
-            return <Message 
-              key={message.id}
-              message={message}
-              username={this.props.users[message.authorId].username}
-              bottom={this.bottom}
-            />
-        }) : (
-          <div className=''>
-            <h1>Welcome to {this.props.chat.name}!</h1>
-          </div>
-        )
+    let messageList = (
+        <li>
+          <div className="message-container">no messages here yet</div>
+          <div ref={this.bottom} />
+        </li>
+    )
+    let currentChannelMessages = this.currentMessages();
+    if (currentChannelMessages.length > 0) {
+      messageList = currentChannelMessages.map((message, idx) => {
+        return (
+          <li key={message.id}>
+            <div className="message-container">
+              <img className="message-avatar" src={message.avatar}></img>
+              <div className="message-body">
+                <div className="message-author">
+                  {message.author}
+                </div>
+                <div>
+                  {message.body}
+                </div>
+              </div>
+            </div>
+            <div ref={this.bottom} />
+          </li>
+        );
+      });
+    } 
+
+    const channels = this.props.channels;
+    let display;    
+    if (channels.length < 1) {
+      display = "";
     } else {
-      return <div className=''>Loading...</div>
+      let channel = channels.find(channel => channel.id === parseInt(this.props.match.params.channelId));
+      if (channel){
+        display = channel.name;
+      }
     }
 
     return (
-      <div className=''>
-        <div className=''>
+      <div className="chatroom-container">
+        <div className="chatroom-channel"># {display}</div>
+        {/* <button className="load-button" 
+          onClick={this.loadChat.bind(this)}>
+          Load Chat History
+        </button> */}
+        <div className="message-list">
           {messageList}
         </div>
-        <MessageFormContainer 
-          subscription={this.subscription} />
+        <MessageForm {...this.props} currentChannel={display} />
       </div>
-    )
-  } 
+    );
+  }
 }
 
-export default ChatRoom; 
+const mSTP = (state, ownProps) => {
+ 
+  let channelId = parseInt(ownProps.match.params.channelId);
+  return {
+    channelId,
+    currentUser: state.entities.users[state.session.id],
+    messages: Object.values(state.entities.messages),
+    users: Object.values(state.entities.users),
+    channels: Object.values(state.entities.channels)
+  };
+};
+
+const mDTP = dispatch => {
+  return {
+    fetchUsers: () => dispatch(fetchUsers()),
+    fetchChannels: () => dispatch(fetchChannels()),
+    fetchMessages: () => dispatch(fetchMessages()),
+    fetchMessage: (message) => dispatch(fetchMessage(message)),
+    createMessage: (message) => dispatch(createMessage(message)),
+    deleteMessage: (id) => dispatch(deleteMessage(id)),
+  };
+};
+
+export default withRouter(connect(mSTP, mDTP)(ChatRoom));

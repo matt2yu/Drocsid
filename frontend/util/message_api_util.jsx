@@ -1,23 +1,38 @@
-
-
-export const getChannelMessages = (state, channelId) => {
-  const channelMessages = Object.values(state.entities.messages).filter(message => {
-    return message.messageableId == channelId
-  })
-  return channelMessages;
-}
-
-export const fetchChannelMessages = channelId => {
-  return $.ajax({
+export const fetchMessages = (channelId) => (
+  $.ajax({
     method: 'GET',
-    url: `/api/channels/${channelId}/messages`
+    url: `/api/messages`,
+    data: {messageable_type: "Channel",
+           messageable_id: `${channelId}`}
   })
-}
+);
 
-export const createMessage = message => {
-  return $.ajax({
-    method: 'POST',
-    url: '/api/messages',
-    data: { message }
+export const fetchMessage = (messageId) => (
+  $.ajax({
+    method: 'GET',
+    url: `/api/messages/${messageId}`
   })
-}
+);
+
+export const createMessage = (message) => (
+  $.ajax({
+    method: 'POST',
+    url: `/api/messages`,
+    data: {message}
+  })
+);
+
+export const updateMessage = (message) => (
+  $.ajax({
+    method: 'PATCH',
+    url: `/api/messages/${message.id}`,
+    data: {message}
+  })
+);
+
+export const deleteMessage = (messageId) => (
+  $.ajax({
+    method: 'DELETE',
+    url: `/api/messages/${messageId}`
+  })
+);
