@@ -10,7 +10,7 @@ import LogInFormContainer from './session_form/login_form_container';
 import ServerContainer from './server/server_container';
 import ChannelContainer from './channel/channel_container';
 import ServerItem from './server/server_item';
-import ChannelItem from './channel/channel_item'
+import ChannelItemContainer from './channel/channel_item_container'
 import NotFoundPage from './NotFoundPage'
 // import 
 
@@ -21,7 +21,7 @@ const App = () => (
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
       <ProtectedRoute path="/home" component={HomeContainer} />
-      <ProtectedRoute path='/servers/:serverId/channels/:channelId' component={ChannelItem} />
+      <ProtectedRoute path='/servers/:serverId/channels/:channelId' component={ChannelItemContainer} />
       <ProtectedRoute exact path='/servers/:serverId/channels' component={ChannelContainer} />
       <ProtectedRoute path='/servers/:serverId' component={ServerItem} />
       <ProtectedRoute exact path='/servers/' component={ServerContainer} />

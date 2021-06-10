@@ -1,1 +1,1 @@
-json.array! channels, :id, :name
+json.extract! channel, :id, :name

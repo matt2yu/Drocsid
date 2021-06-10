@@ -1,9 +1,4 @@
-class Api::MessagesController < ApplicationController
-
-  def index
-    channel = Channel.find(params[:channel_id])
-    @messages = Message.all.where(messageable_id: channel.id)
-    render :index
-  end
-
+class Api::MessagesController < ApplicationController 
+# app/controllers/messages_controller.rb
+  def index; end
 end

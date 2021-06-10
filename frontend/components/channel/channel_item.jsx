@@ -1,7 +1,7 @@
 import React from 'react';
 import ServerContainer from '../server/server_container';
-// import ChannelContainer from '.channel_container';
-import ChannelMemberList from './channel_member_list';
+import ChatRoom from '../message/chat_room';
+// import ChannelMemberList from './channel_member_list';
 
 
 class ChannelItem extends React.Component {
@@ -23,6 +23,7 @@ class ChannelItem extends React.Component {
       <div className='channel-item'> 
         <ServerContainer />
         <br />
+        <ChatRoom channelId={this.props.match.params.channelId} currentUserId={this.props.currentUserId} />
         {/* <ChannelContainer serverId={serverId} /> */}
         {/* <ChannelMemberList /> */}
         <br />

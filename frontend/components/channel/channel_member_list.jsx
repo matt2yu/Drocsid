@@ -19,8 +19,8 @@ class ChannelMemberList extends React.Component {
 
 
   render () {
-    let memberNames;
-    let memberId = this.props.serverId;
+    let channelNames;
+    let channelId = this.props.channelId;
     if (!this.state.loading) {
       let channels = Object.values(this.props.channels);
       channelNames = channels.map((channel,i) => (

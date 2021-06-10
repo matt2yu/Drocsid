@@ -1,3 +1,4 @@
-json.array! @messages.each do |message|
-  json.partial! 'api/messages/message', message: message
-end
+@messages.each do |message|
+  json.set! message.id do
+    json.partial! 'api/messages/message', message: message
+  end
