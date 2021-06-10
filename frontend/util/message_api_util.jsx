@@ -3,7 +3,7 @@ export const fetchMessages = (channelId) => (
     method: 'GET',
     url: `/api/messages`,
     data: {messageable_type: "Channel",
-           messageable_id: `${channelId}`}
+          messageable_id: `${channelId}`}
   })
 );
 
