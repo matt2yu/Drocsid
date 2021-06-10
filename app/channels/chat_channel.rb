@@ -4,13 +4,20 @@ class ChatChannel < ApplicationCable::Channel
     stream_for @chat
   end
   def speak(data)
-    message = Message.create(
-      body: data['message']['body'],
-      author_id: data['message']['authorId'],
-      messageable_id: @chat.id,
-      messageable_type: @chat
+    debugger
+    message = Message.create!(
+      body: data['message'],
+      author_id: data['author_id'],
+      messagable_id: data['channel_id'],
+      messagable_type: 'Channel'
     )
-    socket = { message: message.body }
+    socket = { 
+      message: {
+        body: data['message'],
+        author_id: data['author_id'],
+        messagable_id: data['channel_id'],
+        messagable_type: 'Channel'
+      }}
     ChatChannel.broadcast_to(@chat, socket)
   end
   def unsubscribed; end

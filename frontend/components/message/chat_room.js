@@ -10,7 +10,7 @@ class ChatRoom extends React.Component {
   
   componentDidMount() {
     App.cable.subscriptions.create(
-      { channel: "ChatChannel" },
+      { channel: "ChatChannel", id: this.props.channelId },
       {
         received: data => {
           this.setState({
@@ -32,7 +32,7 @@ class ChatRoom extends React.Component {
     const messageList = this.state.messages.map(message => {
       return (
         <li key={message.id}>
-          {message} 
+          {message.body} 
           <div ref={this.bottom} />
         </li>
       );
@@ -41,7 +41,7 @@ class ChatRoom extends React.Component {
       <div className="chatroom-container">
         <div>ChatRoom</div>
         <div className="message-list">{messageList}</div>
-        <MessageForm />
+        <MessageForm currentUserId={this.props.currentUserId} channelId={this.props.channelId} />
       </div>
     );
   }

@@ -1,1 +1,1 @@
-json.array! servers, :id, :name
+json.extract! server, :id, :name

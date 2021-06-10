@@ -13,7 +13,7 @@ class MessageForm extends React.Component {
   
   handleSubmit(e) {
     e.preventDefault();
-    App.cable.subscriptions.subscriptions[0].speak({ message: this.state.body });
+    App.cable.subscriptions.subscriptions[0].speak({ message: this.state.body, author_id: this.props.currentUserId, channel_id: this.props.channelId });
     this.setState({ body: "" });
   }
   

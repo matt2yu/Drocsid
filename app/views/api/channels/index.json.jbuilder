@@ -1,2 +1,6 @@
 # json.array! @channels, :id, :name
-json.partial! "api/channels/channels", channels: @channels
+@channels.each do |channel| 
+  json.set! channel.id do 
+    json.partial! "api/channels/channels", channel: channel
+  end
+end
