@@ -899,8 +899,7 @@ var ChatRoom = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.bottom.current.scrollIntoView();
+    value: function componentDidUpdate() {// this.bottom.current.scrollIntoView();
     }
   }, {
     key: "render",

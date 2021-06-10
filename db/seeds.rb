@@ -8,7 +8,6 @@
 
 User.destroy_all
 Server.destroy_all
-Channel.destroy_all
 
 ActiveRecord::Base.connection.reset_pk_sequence!('users')
 
@@ -85,6 +84,13 @@ demo_channel6 = Channel.create!(
   server_id: demo_server2.id
 )
 
+
+message1 = Message.create!(
+  body: "Hello everyone. This is the first test message on Drocsid.",
+  author_id: demo_user.id
+  # messageable_id: demo_channel1.id,
+  # messageable_type: 'Channel'
+)
 
 # 10 random demo users
 # 10.times {
