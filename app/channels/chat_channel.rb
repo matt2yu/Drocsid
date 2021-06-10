@@ -4,7 +4,6 @@ class ChatChannel < ApplicationCable::Channel
     stream_for @chat
   end
   def speak(data)
-    debugger
     message = Message.create!(
       body: data['message'],
       author_id: data['author_id'],
