@@ -3,7 +3,7 @@
   padding: 5px;
 }
 li {
-  list-style: decimal;
+  list-style: 'demouser: ';
 }
 .chatroom-container {
   background-color: #2f3136;
@@ -13,8 +13,8 @@ li {
 }
 .message-list {
   overflow-y: scroll;
-  height: 500px;
-  width: 400px;
+  height: 800px;
+  width: 1200px;
   border: solid black 1px;
   background: gray;
 }
@@ -33,3 +33,13 @@ li {
   align-items: center;
 }
 
+.channel-name {
+  background-color: gray;
+  color: white;
+  width: 1200px;
+}
+
+.message-form > input[type=text]  {
+  background-color: rgba(88, 87, 87, 0.966);
+  width: 1127px;
+}

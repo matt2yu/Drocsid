@@ -39,7 +39,7 @@ class ChatRoom extends React.Component {
     });
     return (
       <div className="chatroom-container">
-        <div># Channel Name</div>
+        <div className='channel-name'># Channel Name</div>
         <div className="message-list">{messageList}</div>
         <MessageForm currentUserId={this.props.currentUserId} channelId={this.props.channelId} />
       </div>
