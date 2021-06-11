@@ -9,4 +9,4 @@
 ### [](https://github.com/matt2yu/Drocsid/#demo)Demo
 --------------------------------------------------
 
-Here is a link to the web application: [Drocsid](http://Drocsid-clone.herokuapp.com/#/)
+Link to my app: [Drocsid](http://Drocsid-clone.herokuapp.com/#/)
