@@ -1,5 +1,8 @@
 import React from 'react';
 import ServerContainer from '../server/server_container';
+import { Link } from 'react-router-dom';
+
+
 import ChatRoom from '../message/chat_room';
 // import ChannelMemberList from './channel_member_list';
 
@@ -17,18 +20,31 @@ class ChannelItem extends React.Component {
     this.setState({ id: id });
   }
 
+
+  channelNames() {
+    let channelNames;
+    let serverId = this.props.serverId;
+      let channels = Object.values(this.props.channels);
+      channelNames = channels.map((channel,i) => (
+        <li key={i}>
+          <Link to={`/servers/${serverId}/channels/${channel.id}`}>
+            {channel.name}
+          </Link>
+        </li>
+      ));
+    }
+
+
   render() {
     let serverId = this.state.id;
     return ( 
       <div className='channel-item'> 
-        <ServerContainer />
-        <br />
-        <ChatRoom channelId={this.props.match.params.channelId} currentUserId={this.props.currentUserId} />
-        {/* <ChannelContainer serverId={serverId} /> */}
-        {/* <ChannelMemberList /> */}
-        <br />
-        <br />
-        <h1>Eventually messages, server container, and member list side bar container will all be in each channel </h1>
+        <div className='server-navbar'> 
+          <ServerContainer />
+          <div className='chat-room'>
+            <ChatRoom channelId={this.props.match.params.channelId} currentUserId={this.props.currentUserId} />
+          </div>
+        </div>
       </div>
     )
   }

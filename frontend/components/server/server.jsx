@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Channel from '../channel/channel';
 
 
 class Server extends React.Component {
@@ -21,20 +22,25 @@ class Server extends React.Component {
     if (!this.props.loading) {
       let servers = Object.values(this.props.servers);
       serverNames = servers.map((server, i) => (
-        <li key={i}>
+      <div>
+        <br />
+        <div className='list-item' key={i}>
           <Link to={`/servers/${server.id}`}>
+            <img className='server-icons' src='https://i.imgur.com/xWHsRqm.png'></img>
             {server.name}
           </Link>
-        </li>
+        </div>
+        <br />
+      </div>
       ));
     }
 
 
     return (
       <div className='server'>
-        <span>
-          List of my servers:
-        </span>
+        <Link to={`/home`}>
+        <img className='server-icons' src='https://i.imgur.com/zqQmMbc.jpg'></img>
+        </Link>
           {serverNames}
       </div>
     )

@@ -1,3 +1,34 @@
-.home {
-  background-color: gray;
+
+
+.home-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  font-family: Whitney, 'Helvetica Neue', Helvetica,Arial, sans-serif;
+  color: white;
+  background-color: #36393f;
 }
+
+
+.home-text {
+  font-size: 22px;
+
+}
+
+// .server-content {
+// }
+.home-content {
+  font-size: 34px;
+  flex: 50%;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  font-family: Whitney, 'Helvetica Neue', Helvetica,Arial, sans-serif;
+  color: white;
+  text-align: center;
+  background-color: #36393f;
+}
+

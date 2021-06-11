@@ -24,9 +24,10 @@ class Channel extends React.Component {
     if (!this.state.loading) {
       let channels = Object.values(this.props.channels);
       channelNames = channels.map((channel,i) => (
-        <li key={i}>
+        <li className='channel-items' key={i}>
           <Link to={`/servers/${serverId}/channels/${channel.id}`}>
             {channel.name}
+            
           </Link>
         </li>
       ));
@@ -34,9 +35,11 @@ class Channel extends React.Component {
 
     return (
       <div className='channel'>
-        <span>
-          List of Channels:
-          {channelNames}
+          <img className='invite' src="https://i.imgur.com/h3v6rYu.png" alt="" />
+        <span className='this-span'>
+          <p>Text Channels</p>
+          <br />
+          <span className='channel-names'>{channelNames}</span>
         </span>
       </div>
     )

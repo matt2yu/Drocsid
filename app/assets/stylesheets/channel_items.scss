@@ -1,4 +1,24 @@
 .channel-item {
-  background-color: gray;
+  background-color: #36393f;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  font-weight: bold;
+  font-family: Whitney, 'Helvetica Neue', Helvetica,Arial, sans-serif;
+}
+
+.server_navbar {
+  flex: 10%;
+  background-color: #36393f;
 
 }
+
+.chat-room {
+  flex: 80%;
+  position: absolute;
+  top: 100px;
+  right: 300px;
+}
+
+

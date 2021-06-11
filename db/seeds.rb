@@ -9,6 +9,7 @@
 Channel.destroy_all
 Server.destroy_all
 User.destroy_all
+Message.destroy_all
 
 
 ActiveRecord::Base.connection.reset_pk_sequence!('users')
@@ -86,3 +87,30 @@ demo_channel6 = Channel.create!(
   server_id: demo_server2.id
 )
 
+demo_message1 = Message.create!(
+  body: 'matt2yu: welcome to drocsid everybody!',
+  messagable_id: demo_channel1.id,
+  messagable_type: 'Channel',
+  author_id: demo_user.id
+)
+
+demo_message2 = Message.create!(
+  body: 'matt2yu: the site is still in the works',
+  messagable_id: demo_channel1.id,
+  messagable_type: 'Channel',
+  author_id: demo_user.id
+)
+
+demo_message3 = Message.create!(
+  body: 'matt2yu: feel free to look around',
+  messagable_id: demo_channel1.id,
+  messagable_type: 'Channel',
+  author_id: demo_user.id
+)
+
+demo_message4 = Message.create!(
+  body: "demouser: don't mind me",
+  messagable_id: demo_channel1.id,
+  messagable_type: 'Channel',
+  author_id: demo_user.id
+)

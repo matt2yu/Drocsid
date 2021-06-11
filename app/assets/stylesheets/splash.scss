@@ -32,7 +32,7 @@
 .nav-bar {
   display: flex;
   justify-content: space-evenly;
-  width: 500px;
+  width: 600px;
   font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
   font-weight: bold;
@@ -129,5 +129,7 @@
 
 a{ 
   color: white;
-  text-decoration: none; 
+  text-decoration: none;
+  text-overflow: ''
+  
 }

@@ -1,3 +1,20 @@
 .server-item {
-  background-color: gray;
+  background-color: #2f3136;
+  display: flex;
+}
+
+.server-container {
+  flex: 10%;
+}
+
+.chat-room {
+  flex: 80%;
+}
+
+.channel-container {
+  flex: 10%;
+  position: absolute;
+  left: 100px;
+  margin: 10px;
+  padding: 10px;
 }

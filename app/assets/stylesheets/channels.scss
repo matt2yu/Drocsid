@@ -2,5 +2,33 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .channel {
-  background-color: gray;
+  background-color: #2f3136;
+  position: relative;
+  left: 20px;
+  top: -12px;
+  color: white;
+  font-family: Whitney, 'Helvetica Neue', Helvetica,Arial, sans-serif;
+}
+.invite {
+  position: relative;
+  left: -16px;
+}
+.channel-items {
+  content: "#";
+  font-weight: bold;
+  color: white;
+  list-style-type: '# ';
+  margin: 20px;
+}
+
+body {
+  background-color: #2f3136;
+}
+
+.this-span {
+  text-align: left;
+}
+
+.channel-names {
+  justify-content: space-evenly;
 }
