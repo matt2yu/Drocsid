@@ -8,5 +8,4 @@ class Message < ApplicationRecord
   
   belongs_to :messagable,
     polymorphic: true
-    # what is this doing
 end
