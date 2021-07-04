@@ -8,5 +8,5 @@ class Message < ApplicationRecord
     primary_key: :id,
     foreign_key: :author_id,
     class_name: :User
-  
+  #1am
 end
